@@ -1,0 +1,28 @@
+Etape du projet :
+
+lecture du fichier pour les mots vides 
+
+élimination des espaces ainsi que les espaces pour avoir un tableau des mots du fichier des mots vides
+
+lecture du fichier html
+
+retourner un tableau contenant les quatre parties du fichier html
+
+supprimer les éléments vides de taille zéro
+
+retourner le contenu head et le contenu body
+
+pour chaque élément le transformer en minuscule
+
+pour chaque élément retourner seulement les mots et les chiffres dans un tableau
+
+vérifier si l’élément est non vide
+
+ si oui le supprimer
+
+ sinon comparer tous les éléments des mots vides et les mots du fichier, si le mots du fichier est inclus dans l’un des mots vides on le supprime
+
+var result = str.match(/<p>(.*?)<\/p>/g).map(function(val){
+    return val.replace(/<\/?p>/g,'');
+ });
+console.log(result)

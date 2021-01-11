@@ -1,0 +1,480 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="copyright" content="2005 by Jean-Fran�ois Pillou">
+<META NAME="date" content="26 juillet 2005">
+<META NAME="ROBOTS" content="all">
+<META NAME="author" content="Jean-Fran�ois Pillou">
+<META NAME="subject" content="Comment �a marche?">
+<META NAME="topic" content="Pirater">
+<meta>hacker, hackers, pirate, pirates, pirate informatique, vulnerabilites, vuln&eacute;rabilit&eacute;s, vulnerabilite, vuln&eacute;rabilit&eacute;, trou de securite, trou de s&eacute;curit&eacute;, security hole, failles de securite, faille de s&eacute;curit&eacute;, compromission root, Compromission, root compromise, prise d'empreinte, relev&eacute; d'informations, intrusion, social engineering, ingenierie sociale, ing&eacute;nierie sociale, extension de privil&egrave;ges, audit, backdoor, porte d&eacute;rob&eacute;e, mappeur passif</meta>
+<META NAME="title" content="Attaques - M&eacute;thodologie d'une intrusion sur un r&eacute;seau">
+<meta>Afin de pouvoir s&eacute;curiser un syst&egrave;me, il est n&eacute;cessaire d'identifier les menaces potentielles, et donc de conn&acirc;tre et de pr&eacute;voir la fa&ccedil;on de proc&eacute;der de l'ennemi. Le but de ce dossier est ainsi de donner un aper&ccedil;u des  motivations &eacute;ventuelles des pirates, de cat&eacute;goriser ces derniers, et enfin de donner un aper&ccedil;u de leur fa&ccedil;on de proc&eacute;der afin de mieux comprendre comment il est possible de limiter les risques d'intrusions</meta>
+<title>S&eacute;curit&eacute; - M&eacute;thodologie d'une intrusion sur un r&eacute;seau</title>
+<link rel="stylesheet" href="../ccm.css" type="text/css">
+
+
+
+<link rel="alternate" type="application/rss+xml" title="CCM: Actualit&eacute; informatique" href="http://www.commentcamarche.net/rss/actualite.php3">
+<link rel="alternate" type="application/rss+xml" title="CCM: Actualit&eacute;s du site CommentCaMarche.net" href="http://www.commentcamarche.net/rss/rss.php3">
+</head>
+
+<body>
+
+<table class="ccmmain">
+<tr>
+<td height="1" width="170"><img src="../images/pixel_transparent.gif" height="1" width="100%" alt=""></td>
+<td height="1" width="540"><img src="../images/pixel_transparent.gif" height="1" width="100%" alt=""></td>
+<td height="1" width="12"><img src="../images/pixel_transparent.gif" height="1" width="100%" alt=""></td>
+<td height="1" width="10"><img src="../images/pixel_transparent.gif" height="1" width="100%" alt=""></td>
+</tr>
+
+<tr>
+<td colspan="2" bgcolor="#AEBFE2" style="vertical-align:top;text-align:left;height:46;background-color:#AEBFE2;">
+<table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+    <td style="vertical-align:top;"><a href="../index.htm" target="_top"><img src="../images/logotop.png" border="0" width="328" height="42" title="Comment Ca Marche - Communaut&eacute; informatique" alt="Comment Ca Marche - Communaut&eacute; informatique"></a></td>
+    <td style="width:30px">&nbsp;</td>
+    <td style="vertical-align:middle;text-align:left"></td></tr>
+</table>
+</td>
+<td style="background-color: #AEBFE2; vertical-align:bottom;">&nbsp;</td>
+<td style="background-color: #AEBFE2;">&nbsp;</td>
+</tr>
+
+<tr>
+<td bgcolor="#8EA6D6"><div id="ccmicons"><a href="../index.htm"  ><img src="../images/icohome2.gif" name="icohome" alt="Accueil - Encyclop&eacute;die informatique" title="Accueil - Encyclop&eacute;die informatique" width="24" border="0"></a><a href="http://www.commentcamarche.net/encyclopedie"  ><img src="../images/icozip2.gif" name="icozip" alt="T&eacute;l&eacute;charger l'encyclop&eacute;die" title="T&eacute;l&eacute;charger l'encyclop&eacute;die" width="24" border="0"></a><a href="http://www.commentcamarche.net/ccmbugs/?Bug_url=%2Fattaques%2Fmethodologie.php3#ecrire"  ><img src="../images/icowri2.gif" name="icowri" alt="Contribuer &agrave; cet article" width="24" border="0"></a><a href="http://www.commentcamarche.net/contact/"  ><img src="../images/icomail2.gif" name="icomail" alt="" title="Ecrire &agrave; Jean-Francois Pillou" width="24"  border="0"></a></div></td>
+<td colspan="3" bgcolor="#8EA6D6"></td>
+</tr>
+
+<tr>
+<td height="1"><img src="../images/pixel_white.png" height="1" width="100%" alt=""></td>
+<td height="1"><img src="../images/pixel_white.png" height="1" width="100%" alt=""></td>
+<td height="1" rowspan="2"><img src="../images/pixel_white.png" height="1" width="12" alt=""></td>
+
+<td bgcolor="#FFFFFF" height="100%" valign="top" rowspan="2">
+</td>
+</tr>
+
+<tr><td valign="top" colspan="3"><div id="contenu"><h1> Attaques - M&eacute;thodologie d'une intrusion sur un r&eacute;seau</h1><table border="0" cellpadding="0" cellspacing="0" width="722">
+	<tr>
+		<td><img src="images/methodologie.png" alt="S&eacute;curit&eacute; - M&eacute;thodologie d'une instrusion sur un r&eacute;seau"></td>
+		<td valign="top" width="38"><a href="typologie-pirates.htm"><img src="../images/bckward.gif" border="0" width="38" height="63" alt=""></a></td>
+		<td valign="top" width="38"><a href="exploits.htm"><img src="../images/forward.gif" border="0" width="38" height="63" alt=""></a></td>		<td valign="top" width="63"><a href="../index.htm"><img src="../images/logoPClw.gif" alt="Encyclop�die" height="60" width="63" border="0"></a></td>
+		</tr>
+</table>
+<br><div id="CCMmenu"><table width="156">
+<tr><th>Attaques / Arnaques</th></tr>
+<tr><td><a class="mlink" href="attaques.htm">Piratage</a></td></tr>
+<tr><th><span class="rouge">Pirates</span></th></tr>
+<tr><td><a class="mlink" href="typologie-pirates.htm">Typologie de pirates</a></td></tr>
+<tr><td><a class="mlink" href="methodologie.htm">M&eacute;thodologie</a></td></tr>
+<tr><td><a class="mlink" href="exploits.htm">Exploits</a></td></tr>
+<tr><th><span class="rouge">Attaques cryptographiques</span></th></tr>
+<tr><td><a class="mlink" href="passwd.htm">Mot de passe</a></td></tr>
+<tr><td><a class="mlink" href="man-in-the-middle.htm">Man in the middle</a></td></tr>
+<tr><td><a class="mlink" href="rejeu.htm">Rejeu</a></td></tr>
+<tr><th><span class="rouge">D&eacute;ni de service</span></th></tr>
+<tr><td><a class="mlink" href="dos.htm">D&eacute;ni de service</a></td></tr>
+<tr><td><a class="mlink" href="attaque-smurf.htm">Attaque par r&eacute;flexion</a></td></tr>
+<tr><td><a class="mlink" href="attaque-ping-de-la-mort.htm">Ping de la mort</a></td></tr>
+<tr><td><a class="mlink" href="attaque-teardrop.htm">Fragmentation</a></td></tr>
+<tr><td><a class="mlink" href="attaque-land.htm">Land</a></td></tr>
+<tr><td><a class="mlink" href="attaque-syn.htm">SYN</a></td></tr>
+<tr><th><span class="rouge">Techniques</span></th></tr>
+<tr><td><a class="mlink" href="usurpation-ip-spoofing.htm">Usurpation d'adresse IP</a> (<a class="mlink" href="usurpation-ip-spoofing.htm">spoofing</a>)</td></tr>
+<tr><td><a class="mlink" href="vol-session-hijacking.htm">Vol de session</a> (<a class="mlink" href="vol-session-hijacking.htm">hijacking</a>)</td></tr>
+<tr><td><a class="mlink" href="arp-poisoning.htm">ARP poisoning</a></td></tr>
+<tr><td><a class="mlink" href="sniffers.htm">Ecoute r&eacute;seau</a> (<a class="mlink" href="sniffers.htm">sniffers</a>)</td></tr>
+<tr><td><a class="mlink" href="balayage-ports.htm">Balayage de ports</a> (<a class="mlink" href="balayage-ports.htm">Port scanning</a>)</td></tr>
+<tr><td><a class="mlink" href="buffer-overflow.htm">D&eacute;bordement de tampon</a> (<a class="mlink" href="buffer-overflow.htm">Buffer overflow</a>)</td></tr>
+<tr><td><a class="mlink" href="spam.htm">Spam</a></td></tr>
+<tr><td><a class="mlink" href="mailbombing.htm">Mail-bombing</a></td></tr>
+<tr><th><span class="rouge">Vuln&eacute;rabilit&eacute;s du web</span></th></tr>
+<tr><td><a class="mlink" href="attaques-web.htm">Attaques web</a></td></tr>
+<tr><td><a class="mlink" href="falsification-donnees.htm">Falsification de la saisie</a></td></tr>
+<tr><td><a class="mlink" href="manipulation-url.htm">Manipulation d'URL</a></td></tr>
+<tr><td><a class="mlink" href="cross-site-scripting.htm">Cross-Site Scripting</a></td></tr>
+<tr><td><a class="mlink" href="injection-commandes-sql.htm">Injection SQL</a></td></tr>
+<tr><th><span class="rouge">Arnaques</span></th></tr>
+<tr><td><a class="mlink" href="ingenierie-sociale.htm">Ing&eacute;nierie sociale</a> (<a class="mlink" href="ingenierie-sociale.htm">social engineering</a>)</td></tr>
+<tr><td><a class="mlink" href="scam.htm">Scam</a></td></tr>
+<tr><td><a class="mlink" href="phishing.htm">Phishing</a></td></tr>
+<tr><td><a class="mlink" href="loteries.htm">Loteries</a></td></tr>
+<tr><th><span class="rouge">Plus d'information</span></th></tr>
+<tr><td><a class="mlink" href="../virus/virus.htm">Virus</a></td></tr>
+<tr><td><a class="mlink" href="../virus/trojan.htm">Cheval de Troie</a></td></tr>
+<tr><td><a class="mlink" href="../virus/spywares.htm">Spyware</a></td></tr>
+<tr><td><a class="mlink" href="../virus/hoax.htm">Hoax</a></td></tr>
+<tr><td><a class="mlink" href="http://www.commentcamarche.net/faq/12-securite">FAQ s&eacute;curit&eacute;</a></td></tr>
+<tr><td><a class="mlink" href="http://www.commentcamarche.net/faq/156-internet">FAQ Internet</a></td></tr>
+</table></div>
+<hr>
+
+Cet article a pour but d'expliquer la m&eacute;thodologie g&eacute;n&eacute;ralement retenue par les pirates
+pour s'introduire dans un syst&egrave;me informatique. Il ne vise pas &agrave; expliquer comment compromettre
+un syst&egrave;me mais &agrave; comprendre la fa&ccedil;on dont il peut l'&ecirc;tre afin de mieux pouvoir
+s'en pr&eacute;munir. En effet, la meilleure fa&ccedil;on de prot&eacute;ger son syst&egrave;me est de proc&eacute;der
+de la m&ecirc;me mani&egrave;re que les pirates afin de cartographier les vuln&eacute;rabilit&eacute;s du syst&egrave;me.
+
+<p align="justify">Ainsi cet article ne donne aucune pr&eacute;cision sur la mani&egrave;re dont les failles
+sont exploit&eacute;es, mais explique comment faire en sorte de les d&eacute;celer et de les corriger.
+
+<a name="methodologie" class="ancre"></a><h2>M&eacute;thodologie globale</h2>
+
+<p align="justify">Les hackers ayant l'intention de s'introduire dans les syst�mes informatiques recherchent dans un premier temps
+des <b>failles</b>, c'est-&agrave;-dire des <i>vuln&eacute;rabilit&eacute;s</i> nuisibles &agrave; la s&eacute;curit&eacute;
+du syst&egrave;me, dans les <a href="../internet/protocol.htm">protocoles</a>, les <a href="../systemes/sysintro.htm">syst&egrave;mes d'exploitations</a>,
+les applications ou m&ecirc;me le personnel d'une organisation !  Les termes de <b>vuln&eacute;rabilit&eacute;</b>, de <b>br&egrave;che</b> ou en langage plus familier
+de <b>trou de s&eacute;curit&eacute;</b> (en anglais <i>security hole</i>) sont &eacute;galement utilis&eacute;s pour d&eacute;signer les failles de s&eacute;curit&eacute;.
+
+<p align="justify">Pour pouvoir mettre en oeuvre un <a href="../attaques/exploit.htm">exploit</a> (il s'agit du terme technique signifiant <i>exploiter une vuln&eacute;rabilit&eacute;</i>),
+la premi&egrave;re &eacute;tape du hacker consiste &agrave; r&eacute;cup&eacute;rer le maximum d'informations
+sur l'architecture du r&eacute;seau et sur les syst&egrave;mes d'exploitations et applications fonctionnant sur celui-ci. La plupart des attaques
+sont l'oeuvre de <i>script kiddies</i> essayant b&ecirc;tement des exploits trouv&eacute;s sur internet, sans aucune connaissance
+du syst&egrave;me, ni des risques li&eacute;s &agrave; leur acte.
+
+<p align="justify">Une fois que le hacker a &eacute;tabli une cartographie du syst&egrave;me, il est en mesure de mettre en application des
+exploits relatifs aux versions des applications qu'il a recens&eacute;es. Un premier acc&egrave;s &agrave; une machine lui permettra d'&eacute;tendre
+son action afin de r&eacute;cup&eacute;rer d'autres informations, et &eacute;ventuellement d'&eacute;tendre ses privil&egrave;ges sur la machine.
+
+<p align="justify">Lorsqu'un acc&egrave;s administrateur (le terme anglais <i>root</i> est g&eacute;n&eacute;ralement utilis&eacute;) est obtenu, on parle alors de compromission de la machine
+(ou plus exactement en anglais <i>root compromise</i>), car les fichiers syst&egrave;mes sont susceptibles d'avoir &eacute;t&eacute; modifi&eacute;s. Le hacker poss&egrave;de alors
+le plus haut niveau de droit sur la machine.
+
+<p align="justify">S'il s'agit d'un pirate, la derni&egrave;re &eacute;tape consiste &agrave; effacer ses traces, afin d'&eacute;viter tout soup&ccedil;on de la part
+de l'administrateur du r&eacute;seau compromis et de telle mani�re � pouvoir garder le plus longtemps possible le contr�le des machines compromises.
+
+<p align="justify">Le sch&eacute;ma suivant r&eacute;capitule la m&eacute;thodologie compl&egrave;te&nbsp;:
+
+<p align="center"><img src="images/schema-methodologie-attaque.png" alt="M&eacute;thodologie d'une attaque r&eacute;seau">
+
+<a name="introduction" class="ancre"></a><h2>La r&eacute;cup&eacute;ration d'informations sur le syst&egrave;me</h2>
+
+<p align="justify">L'obtention d'informations sur l'adressage du r&eacute;seau vis&eacute;, g&eacute;n&eacute;ralement qualifi&eacute;e de <b>prise d'empreinte</b>,
+est un pr&eacute;alable &agrave; toute attaque. Elle consiste &agrave; rassembler le maximum d'informations concernant les
+infrastructures de communication du r&eacute;seau cible&nbsp;:
+<ul>
+<li>Adressage IP,
+<li>Noms de domaine,
+<li>Protocoles de r&eacute;seau,
+<li>Services activ&eacute;s,
+<li>Architecture des serveurs,
+<li>etc.
+</ul>
+
+<a name="bases" class="ancre"></a><h2>Consultation de bases publiques</h2>
+
+<p align="justify">En connaissant l'<a href="../internet/ip.htm">adresse IP publique</a> d'une des machines du r&eacute;seau ou bien tout simplement le nom de domaine de l'organisation,
+un pirate est potentiellement capable de conna&icirc;tre l'adressage
+du r&eacute;seau tout entier, c'est-&agrave;-dire la plage d'adresses IP publiques appartenant &agrave; l'organisation vis&eacute;e et son d&eacute;coupage
+en sous-r&eacute;seaux. Pour cela il suffit de consulter les bases publiques d'attribution des adresses IP et des noms de domaine&nbsp;:
+<ul>
+<li><a href="http://www.iana.net" target="_blank">http://www.iana.net</a>
+<li><a href="http://www.ripe.net" target="_blank">http://www.ripe.net</a> pour l'Europe
+<li><a href="http://www.arin.net" target="_blank">http://www.arin.net</a> pour les Etats-Unis
+</ul>
+
+<a name="moteurs" class="ancre"></a><h2>Consultation de moteurs de recherche</h2>
+
+<p align="justify">La simple consultation des moteurs de recherche permet parfois de gl�ner des informations sur la structure d'une entreprise, le nom de ses principaux produits, voire le nom de certains personnels.
+
+<a name="balayage" class="ancre"></a><h2>Balayage du r&eacute;seau</h2>
+
+<p align="justify">Lorsque la topologie du r&eacute;seau est connue par le pirate, il peut le
+<a href="../attaques/balayage-ports.htm">scanner</a> (le terme <i>balayer</i> est &eacute;galement utilis&eacute;),
+c'est-&agrave;-dire d&eacute;terminer &agrave; l'aide d'un outil logiciel (appel&eacute; <i>scanner</i> ou <i>scanneur</i> en fran&ccedil;ais)
+quelles sont les adresses IP actives sur le r&eacute;seau, les <a href="../internet/port.htm">ports ouverts</a> correspondant &agrave; des services accessibles, et
+le <a href="../systemes/sysintro.htm">syst&egrave;me d'exploitation</a> utilis&eacute; par ces serveurs.
+
+<p align="justify">L'un des outils les plus connus pour scanner un r&eacute;seau est <a href="http://www.insecure.org/nmap/" target="_blank">Nmap</a>,
+reconnu par de nombreux administrateurs r&eacute;seaux comme un outil indispensable &agrave; la s&eacute;curisation d'un r&eacute;seau.
+Cet outil agit en envoyant des paquets TCP et/ou UDP &agrave; un ensemble de machines sur un r&eacute;seau (d&eacute;termin&eacute; par une adresse r&eacute;seau et
+un masque), puis il analyse les r&eacute;ponses. Selon l'allure des paquets TCP re&ccedil;us, il lui est possible de d&eacute;terminer le syst&egrave;me d'exploitation
+distant pour chaque machine scann&eacute;e.
+
+<p align="justify">Il existe un autre type de scanneur, appel&eacute; <b>mappeur passif</b> (l'un des plus connus est <a href="http://siphon.sourceforge.net/" target="_blank">Siphon</a>), permettant de conna&icirc;tre la topologie r&eacute;seau du brin physique
+sur lequel le mappeur analyse les paquets. Contrairement aux scanners pr&eacute;c&eacute;dents, cet outil n'envoie pas de paquets sur le r&eacute;seau et est donc
+totalement ind&eacute;tectable par les <a href="../detection/ids.htm">syst&egrave;mes de d&eacute;tection d'intrusion</a>.
+
+<p align="justify">Enfin, certains outils permettent de capturer les connexions X (un serveur X est un serveur g&eacute;rant l'affichage des machines de type <a href="../unix/unixintro.htm">UNIX</a>).
+Ce syst&egrave;me a pour caract&eacute;ristique de pouvoir utiliser l'affichage des stations pr&eacute;sentes
+sur le r&eacute;seau, afin d'&eacute;tudier ce qui est affich&eacute; sur les &eacute;crans et &eacute;ventuellement d'intercepter les
+touches saisies par les utilisateurs des machines vuln&eacute;rables.
+
+<a name="bannieres" class="ancre"></a><h2>Lecture de banni&egrave;res</h2>
+
+<p align="justify">Lorsque le balayage du r&eacute;seau est termin&eacute;, il suffit au pirate d'examiner le fichier journal (<i>log</i>)
+des outils utilis&eacute;s pour conna&icirc;tre les adresses IP des machines connect&eacute;es au r&eacute;seau et les ports ouverts sur celles-ci.
+
+<p align="justify">Les num&eacute;ros de port ouverts sur les machines peuvent lui donner des informations sur le type de service ouvert et donc l'inviter
+&agrave; interroger le service afin d'obtenir des informations suppl&eacute;mentaires sur la version du serveur dans les informations dites de &laquo;&nbsp;banni&egrave;re&nbsp;&raquo;.
+
+<p align="justify">Ainsi, pour conna&icirc;tre la version d'un serveur HTTP, il suffit de se connecter au serveur Web en Telnet sur le port 80&nbsp;:
+
+<pre class="Code">telnet www.commentcamarche.net 80</pre>
+
+puis de demander la page d'accueil&nbsp;:
+
+<pre class="Code">GET / HTTP/1.0</pre>
+
+Le serveur r&eacute;pond alors les premi&egrave;res lignes suivantes&nbsp;:
+
+<pre class="Code">HTTP/1.1 200 OK
+Date: Thu, 21 Mar 2002 18:22:57 GMT
+Server: Apache/1.3.20 (Unix) Debian/GNU</pre>
+
+Le syst&egrave;me d'exploitation, le serveur et sa version sont alors connus.
+
+<a name="ingenierie-sociale" class="ancre"></a><h2>Ing&eacute;nierie sociale</h2>
+
+<p align="justify">L'<a href="../attaques/ingenierie-sociale.htm">ing&eacute;nierie sociale</a> (en anglais &laquo;&nbsp;<i>Social Engineering</i>&nbsp;&raquo;) consiste &agrave;
+manipuler les &ecirc;tres humains, c'est-&agrave;-dire d'utiliser la na�vet&eacute; et la gentillesse exag&eacute;r&eacute;e des utilisateurs du r&eacute;seau, pour obtenir
+des informations sur ce dernier. Ce proc&eacute;d&eacute; consiste &agrave; entrer en contact avec un utilisateur du r&eacute;seau, en se faisant
+passer en g&eacute;n&eacute;ral pour quelqu'un d'autre, afin d'obtenir des renseignements sur le syst&egrave;me d'information
+ou &eacute;ventuellement pour obtenir directement un mot de passe. De la m&ecirc;me fa&ccedil;on une faille de s&eacute;curit&eacute;
+peut &ecirc;tre cr&eacute;&eacute;e dans le syst&egrave;me distant en envoyant un cheval de Troie &agrave; certains utilisateurs
+du r&eacute;seau. Il suffit qu'un des utilisateurs ex&eacute;cute la pi&egrave;ce jointe pour qu'un acc&egrave;s au r&eacute;seau
+interne soit donn&eacute; &agrave; l'agresseur ext&eacute;rieur.
+
+<p align="justify">C'est la raison pour laquelle la politique de s&eacute;curit&eacute;
+doit &ecirc;tre globale et int&eacute;grer les facteurs humains (par exemple la sensibilisation des utilisateurs aux probl&egrave;mes de s&eacute;curit&eacute;) car le
+niveau de s&eacute;curit&eacute; d'un syst&egrave;me est caract&eacute;ris&eacute; par le niveau de son maillon le plus faible.
+
+<a name="failles" class="ancre"></a><h2>Le rep&eacute;rage des failles</h2>
+
+<p align="justify">Apr&egrave;s avoir &eacute;tabli l'inventaire du parc logiciel et &eacute;ventuellement mat&eacute;riel, il reste au hacker
+&agrave; d&eacute;terminer si des failles existent.
+
+<p align="justify">Il existe ainsi des scanneurs de vuln&eacute;rabilit&eacute; permettant aux administrateurs de soumettre leur r&eacute;seau
+&agrave; des tests d'intrusion afin de constater si certaines applications poss&egrave;dent des failles de s&eacute;curit&eacute;.
+Les deux principaux scanneurs de failles sont&nbsp;:
+<ul>
+<li><a href="http://www.nessus.org/" target="_top">Nessus</a>
+<li><a href="http://www.wwdsi.com/saint/" target="_top">SAINT</a>
+</ul>
+
+<p align="justify">Il est &eacute;galement conseill&eacute; aux administrateurs de r&eacute;seaux de consulter r&eacute;guli&egrave;rement
+les sites tenant &agrave; jour une base de donn&eacute;es des vuln&eacute;rabilit&eacute;s&nbsp;:
+<ul>
+<li><a href="http://www.securityfocus.com" target="_top">SecurityFocus</a> / Vulnerabilities
+</ul>
+
+Ainsi, certains organismes, en particulier les CERT (<i>Computer Emergency Response Team</i>), sont charg&eacute;s de capitaliser les vuln&eacute;rabilit&eacute;s et de f&eacute;d&eacute;rer
+les informations concernant les probl&egrave;mes de s&eacute;curit&eacute;.
+<ul>
+<li><a href="http://www.cert-ist.com/" target="_blank">CERT IST</a> d&eacute;di&eacute; &agrave; la communaut�
+Industrie, Services et Tertiaire fran�aise,
+<li><a href="http://www.certa.ssi.gouv.fr/" target="_blank">CERT IST</a> d&eacute;di&eacute; &agrave;
+l'administration fran�aise,
+<li><a href="http://www.renater.fr/Securite/CERT_Renater.htm" target="_blank">CERT Renater</a> d&eacute;di&eacute; &agrave;
+la communaut� des membres du GIP RENATER (R�seau National de t�l�communications pour la Technologie, l'Enseignement et la Recherche).
+</ul>
+
+<a name="intrusion" class="ancre"></a><h2>L'intrusion</h2>
+
+<p align="justify">Lorsque le pirate a dress&eacute; une cartographie des ressources et des machines pr&eacute;sentes
+sur le r&eacute;seau, il est en mesure de pr&eacute;parer son intrusion.
+
+<p align="justify">Pour pouvoir s'introduire dans le r&eacute;seau, le pirate a besoin d'acc&eacute;der
+&agrave; des comptes valides sur les machines qu'il a recens&eacute;es. Pour ce faire, plusieurs m&eacute;thodes
+sont utilis&eacute;es par les pirates&nbsp;:
+<ul>
+<li>L'ing&eacute;nierie sociale, c'est-&agrave;-dire en contactant directement certains utilisateurs du r&eacute;seau (par mail ou par t&eacute;l&eacute;phone) afin de leur soutirer des informations
+concernant leur identifiant de connexion et leur mot de passe. Ceci est g&eacute;n&eacute;ralement fait en se faisant passer pour l'administrateur r&eacute;seau.
+<li>La consultation de l'annuaire ou bien des services de messagerie ou de partage de fichiers, permettant de trouver des noms d'utilisateurs valides
+<li>L'exploitation des vuln&eacute;rabilit&eacute;s des commandes R* de Berkeley.
+<li>Les attaques par force brute (<i>brute force cracking</i>), consistant &agrave; essayer de fa&ccedil;on automatique diff&eacute;rents mots de passe sur une liste de compte (par exemple l'identifiant, &eacute;ventuellement
+suivi d'un chiffre, ou bien le mot de passe <i>password</i>, ou <i>passwd</i>, etc).
+</ul>
+
+<a name="privileges" class="ancre"></a><h2>Extension de privil&egrave;ges</h2>
+
+<p align="justify">Lorsque le pirate a obtenu un ou plusieurs acc&egrave;s sur le r&eacute;seau en se logeant sur un ou plusieurs comptes peu prot&eacute;g&eacute;s,
+celui-ci va chercher &agrave; augmenter ses privil&egrave;ges en obtenant l'acc&egrave;s <i>root</i> (en fran&ccedil;ais <i>superutilisateur</i> ou
+superadministrateur</i>), on parle ainsi d'<b>extension de privil&egrave;ges</b>.
+
+<p align="justify">D&egrave;s qu'un acc&egrave;s <i>root</i> a &eacute;t&eacute; obtenu
+sur une machine, l'attaquant a la possibilit&eacute; d'examiner le r&eacute;seau &agrave;
+la recherche d'informations suppl&eacute;mentaires.
+
+<p align="justify">Il lui est ainsi possible d'installer un <a href="../attaques/sniffer.htm">sniffeur</a> (en anglais <i>sniffer</i>),
+c'est-&agrave;-dire un logiciel capable d'&eacute;couter
+(le terme <i>reniffler</i>, ou en anglais <i>sniffing</i>, est &eacute;galement employ&eacute;)
+le trafic r&eacute;seau en provenance ou &agrave; destination des machines situ&eacute;es sur le m&ecirc;me brin. Gr&acirc;ce &agrave;
+cette technique, le pirate peut esp&eacute;rer r&eacute;cup&eacute;rer les couples <i>identifiants/mots de passe</i> lui permettant d'acc&eacute;der &agrave; des comptes poss&eacute;dant des privil&egrave;ges &eacute;tendus
+sur d'autres machines du r&eacute;seau (par exemple l'acc&egrave;s au compte d'un administrateur) afin d'&ecirc;tre &agrave; m&ecirc;me de contr&ocirc;ler une plus grande partie du r&eacute;seau.
+
+<p align="justify">Les serveurs NIS pr&eacute;sents sur un r&eacute;seau sont &eacute;galement des cibles de choix pour les pirates car ils regorgent d'informations
+sur le r&eacute;seau et ses utilisateurs.
+
+<a name="privileges" class="ancre"></a><h2>Compromission</h2>
+
+<p align="justify">Gr&acirc;ce aux &eacute;tapes pr&eacute;c&eacute;dentes, le pirate a pu dresser une cartographie
+compl&egrave;te du r&eacute;seau, des machines s'y trouvant, de leurs failles et poss&egrave;de un
+acc&egrave;s <i>root</i> sur au moins l'une d'entre-elles. Il lui est alors possible d'&eacute;tendre
+encore son action en exploitant les relations d'approbation existant entre les diff&eacute;rentes machines.
+
+<p align="justify">Cette technique d'usurpation d'identit&eacute;, appel&eacute;e <a href="../attaques/spoofing.htm">spoofing</a>, permet
+au pirate de p&eacute;n&eacute;trer des r&eacute;seaux privil&eacute;gi&eacute;s
+auxquels la machine compromise a acc&egrave;s.
+
+<a name="backdoor" class="ancre"></a><h2>Porte d&eacute;rob&eacute;e</h2>
+
+<p align="justify">Lorsqu'un pirate a r&eacute;ussi &agrave; infiltrer un r&eacute;seau d'entreprise et &agrave;
+compromettre une machine, il peut arriver qu'il souhaite pouvoir revenir. Pour ce faire celui-ci
+va installer une application afin de cr&eacute;er artificiellement une faille de s&eacute;curit&eacute;,
+on parle alors de <b>porte d&eacute;rob&eacute;e</b> (en anglais <b>backdoor</b>, le terme <i>trappe</i>
+est parfois &eacute;galement employ&eacute;).
+
+<a name="nettoyage" class="ancre"></a><h2>Nettoyage des traces</h2>
+
+<p align="justify">Lorsque l'intrus a obtenu un niveau de ma&icirc;trise suffisant sur le r&eacute;seau, il lui
+reste &agrave; effacer les traces de son passage en supprimant les fichiers qu'il a cr&eacute;&eacute;s
+et en nettoyant les fichiers de logs des machines dans lesquelles il s'est introduit, c'est-&agrave;-dire
+en supprimant les lignes d'activit&eacute; concernant ses actions.
+
+<p align="justify">Par ailleurs, il existe des logiciels, appel&eacute;s &laquo;&nbsp;<b>kits racine</b>&nbsp;&raquo;
+(en anglais &laquo;&nbsp;<i>rootkits</i>&nbsp;&raquo;) permettant de remplacer les outils
+d'administration du syst&egrave;me par des versions modifi&eacute;es afin de masquer la pr&eacute;sence
+du pirate sur le syst&egrave;me. En effet, si l'administrateur se connecte en m&ecirc;me temps
+que le pirate, il est susceptible de remarquer les services que le pirate a lanc&eacute; ou tout simplement
+qu'une autre personne que lui est connect&eacute;e simultan&eacute;ment. L'objectif d'un
+rootkit est donc de tromper l'administrateur en lui masquant la r&eacute;alit&eacute;.
+
+<a name="conclusion" class="ancre"></a><h2>Conclusion</h2>
+
+<p align="justify">Il revient &agrave; tout responsable de r&eacute;seau connect&eacute; &agrave; internet
+ d'en assurer sa s&eacute;curit&eacute;, et par cons&eacute;quent d'en tester les failles.
+
+<p align="justify">C'est la raison pour laquelle, un administrateur r&eacute;seau se doit d'&ecirc;tre au courant des
+vuln&eacute;rabilit&eacute;s des logiciels qu'il utilise et de se &laquo;&nbsp;mettre dans la peau d'un pirate&nbsp;&raquo;
+afin d'essayer de s'introduire dans son propre syst&egrave;me et afin d'&ecirc;tre continuellement dans un
+contexte de parano&iuml;a.
+
+<p align="justify">Lorsque les comp&eacute;tences au sein
+de l'entreprise ne sont pas suffisantes pour mener &agrave; bien cette op&eacute;ration, il convient
+de faire r&eacute;aliser un audit par une soci&eacute;t&eacute; sp&eacute;cialis&eacute;e dans la s&eacute;curit&eacute;
+informatique.
+
+<a name="plus" class="ancre"></a><h2>Plus</h2>
+
+<p align="justify">
+<ul>
+<li><a href="http://www.frsirt.com/" target="_blank">http://www.frsirt.com</a></li>
+<li><a href="http://www.hackers-news.com" target="_blank"></a>http://www.hackers-news.com</li>
+<li><a href="http://www.lesnouvelles.net" target="_blank">http://www.lesnouvelles.net</a></li>
+</ul>
+
+
+<p align="right">Article &eacute;crit par <a href="webmaster@commentcamarche.com">Jean-Fran�ois PILLOU</a>, inspir&eacute;
+d'un article de <a href="http://www.gomor.org/Securite/test_d_intrusion.html">GomoR</a>.
+
+<h2 id="sujets_sim">Trucs & astuces pertinents trouv&eacute;s dans la base de connaissances</h2><table class="simili"><tr class="sb">
+<td style="width:75px"><span class="">25/10&nbsp;21h13</span></td><td valign="middle"><a href="http://www.commentcamarche.net/faq/sujet-494-msn-securite-et-reaction-face-a-un-piratage"><img src="../images/carre.gif" border="0" alt=""></a>&nbsp;<a href="http://www.commentcamarche.net/faq/sujet-494-msn-securite-et-reaction-face-a-un-piratage">S�curit� et r�action face � un piratage</a> (<a href="http://www.commentcamarche.net/faq/342-msn-messenger">MSN Messenger</a>)</td>
+
+</tr>
+<tr class="sa">
+<td style="width:75px"><span class="Date">22/09&nbsp;22h07</span></td><td valign="middle"><a href="http://www.commentcamarche.net/faq/sujet-2981-windows-j-utilise-une-version-piratee"><img src="../images/carre.gif" border="0" alt=""></a>&nbsp;<a href="http://www.commentcamarche.net/faq/sujet-2981-windows-j-utilise-une-version-piratee">J'utilise une version pirat�e</a> (<a href="http://www.commentcamarche.net/faq/102-windows">Windows</a>)</td>
+
+</tr>
+<tr class="sb">
+<td style="width:75px"><span class="Date">21/09&nbsp;10h31</span></td><td valign="middle"><a href="http://www.commentcamarche.net/faq/sujet-3140-mythes-mon-pc-n-interesse-pas-les-pirates"><img src="../images/carre.gif" border="0" alt=""></a>&nbsp;<a href="http://www.commentcamarche.net/faq/sujet-3140-mythes-mon-pc-n-interesse-pas-les-pirates">Mon PC n'int�resse pas les pirates</a> (<a href="http://www.commentcamarche.net/faq/434-mythes-et-legendes">Mythes et l�gendes</a>)</td>
+
+</tr>
+<tr class="sa">
+<td style="width:75px"><span class="Date">21/09&nbsp;09h22</span></td><td valign="middle"><a href="http://www.commentcamarche.net/faq/sujet-671-msn-compte-msn-messenger-pirate-piratage-de-compte-hotmail"><img src="../images/carre.gif" border="0" alt=""></a>&nbsp;<a href="http://www.commentcamarche.net/faq/sujet-671-msn-compte-msn-messenger-pirate-piratage-de-compte-hotmail">Compte MSN Messenger pirat� / Piratage de compte Hotmail</a> (<a href="http://www.commentcamarche.net/faq/342-msn-messenger">MSN Messenger</a>)</td>
+
+</tr>
+<tr class="sb">
+<td style="width:75px"><span class="Date">24/10&nbsp;09h52</span></td><td valign="middle"><a href="http://www.commentcamarche.net/faq/sujet-307-astuce-devenir-pirate-informatique"><img src="../images/carre.gif" border="0" alt=""></a>&nbsp;<a href="http://www.commentcamarche.net/faq/sujet-307-astuce-devenir-pirate-informatique">Devenir pirate informatique</a> (<a href="http://www.commentcamarche.net/faq/13-loi-et-droits">Loi et droits</a>)</td>
+
+</tr>
+<tr class="sa">
+<td style="width:75px"><span class="Date">20/07&nbsp;14h12</span></td><td valign="middle"><a href="http://www.commentcamarche.net/faq/sujet-1881-messagerie-pirater-une-boite-mail-facile"><img src="../images/carre.gif" border="0" alt=""></a>&nbsp;<a href="http://www.commentcamarche.net/faq/sujet-1881-messagerie-pirater-une-boite-mail-facile">Pirater une boite mail ? Facile !</a> (<a href="http://www.commentcamarche.net/faq/282-messagerie-electronique">Messagerie �lectronique</a>)</td>
+
+</tr>
+<tr class="sa"><td colspan="3" style="text-align:right"><img src="../images/plus.png" alt="Pirater" border="0"> Plus d'astuces sur &laquo;&nbsp;<a href="../astuces/pirater"><b>Pirater</b></a>&nbsp;&raquo;</td></tr></table><h2 id="discus_sim">Discussions pertinentes trouv&eacute;es dans le forum</h2><table class="simili"><tr class="sb">
+<td><span class="Dategris">02/12&nbsp;09h15</span></td>
+<td style="vertical-align:middle"><a href="http://www.commentcamarche.net/forum/affich-1953112-piratage-en-wifi#2007-02-08%2010%3A33%3A19"><img src="../images/carrevalid.png" border="0" alt="piratage wifi"></a><a href="http://www.commentcamarche.net/forum/affich-1953112-piratage-en-wifi">&nbsp;Piratage en WiFI</a></td>
+<td><a href="http://www.commentcamarche.net/forum/forum-5-reseaux">R�seaux</a></td>
+<td><span class="Date">08/02&nbsp;10h33</span><span class="Date">-&gt;</span><a class="Date" href="http://www.commentcamarche.net/forum/affich-1953112-piratage-en-wifi#2007-02-08%2010%3A33%3A19">Beowulf</a></td><td style="text-align:center"><span class="Texte">29</span></td>
+</tr>
+<tr class="sa">
+<td><span class="Dategris">19/07&nbsp;21h19</span></td>
+<td style="vertical-align:middle"><a href="http://www.commentcamarche.net/forum/affich-1680270-pirater-un-compte-mail-facile#2007-01-18%2022%3A29%3A56"><img src="../images/carrevalid.png" border="0" alt="pirater compte mail facile"></a><a href="http://www.commentcamarche.net/forum/affich-1680270-pirater-un-compte-mail-facile">&nbsp;PIRATER UN COMPTE MAIL ? ...FACILE !</a></td>
+<td><a href="http://www.commentcamarche.net/forum/forum-10-internet">Internet</a></td>
+<td><span class="Date">18/01&nbsp;22h29</span><span class="Date">-&gt;</span><a class="mlink2" href="http://www.commentcamarche.net/forum/affich-1680270-pirater-un-compte-mail-facile#2007-01-18%2022%3A29%3A56">Ssylvainsab</a></td><td style="text-align:center"><span class="Texte">59</span></td>
+</tr>
+<tr class="sb">
+<td><span class="Dategris">11/06&nbsp;00h38</span></td>
+<td style="vertical-align:middle"><a href="http://www.commentcamarche.net/forum/affich-2268068-compte-gmail-pirate#2006-11-13%2015%3A31%3A24"><img src="../images/carrevalid.png" border="0" alt="compte gmail pirat�"></a><a href="http://www.commentcamarche.net/forum/affich-2268068-compte-gmail-pirate">&nbsp;compte gmail pirat�</a></td>
+<td><a href="http://www.commentcamarche.net/forum/forum-7-virus-securite">Virus/S�curit�</a></td>
+<td><span class="Date">13/11&nbsp;15h31</span><span class="Date">-&gt;</span><a class="Date" href="http://www.commentcamarche.net/forum/affich-2268068-compte-gmail-pirate#2006-11-13%2015%3A31%3A24">assi</a></td><td style="text-align:center"><span class="Texte">48</span></td>
+</tr>
+<tr class="sa">
+<td><span class="Dategris">01/05&nbsp;00h08</span></td>
+<td style="vertical-align:middle"><a href="http://www.commentcamarche.net/forum/affich-1484388-piratage-pc#2005-05-02%2017%3A26%3A54"><img src="../images/carreblock.gif" border="0" alt="piratage pc" title="La discussion a �t� ferm�e par un mod�rateur.
+Vous pouvez uniquement lire les discussions mais vous ne pouvez pas y r�pondre.
+"></a><a href="http://www.commentcamarche.net/forum/affich-1484388-piratage-pc">&nbsp;Piratage pc</a></td>
+<td><a href="http://www.commentcamarche.net/forum/forum-11-windows">Windows</a></td>
+<td><span class="Date">02/05&nbsp;17h26</span><span class="Date">-&gt;</span><a class="mlink2" href="http://www.commentcamarche.net/forum/affich-1484388-piratage-pc#2005-05-02%2017%3A26%3A54">pascal1975</a></td><td style="text-align:center"><span class="Texte">42</span></td>
+</tr>
+<tr class="sb">
+<td><span class="Date">28/01&nbsp;15h41</span></td>
+<td style="vertical-align:middle"><a href="http://www.commentcamarche.net/forum/affich-2629678-msn-piratee#2007-02-10%2021%3A26%3A54"><img src="../images/carrevalid.png" border="0" alt="msn pirat�e"></a><a href="http://www.commentcamarche.net/forum/affich-2629678-msn-piratee">&nbsp;[msn] pirat�e????</a></td>
+<td><a href="http://www.commentcamarche.net/forum/forum-7-virus-securite">Virus/S�curit�</a></td>
+<td><span class="Date">10/02&nbsp;21h26</span><span class="Date">-&gt;</span><a class="mlink2" href="http://www.commentcamarche.net/forum/affich-2629678-msn-piratee#2007-02-10%2021%3A26%3A54">afideg</a></td><td style="text-align:center"><span class="Texte">34</span></td>
+</tr>
+<tr class="sa">
+<td><span class="Dategris">08/03&nbsp;01h20</span></td>
+<td style="vertical-align:middle"><a href="http://www.commentcamarche.net/forum/affich-1356093-msn-je-suis-pirate#2007-02-16%2018%3A31%3A03"><img src="../images/carrevalid.png" border="0" alt="msn pirat�"></a><a href="http://www.commentcamarche.net/forum/affich-1356093-msn-je-suis-pirate">&nbsp;[msn]je suis pirat�</a></td>
+<td><a href="http://www.commentcamarche.net/forum/forum-7-virus-securite">Virus/S�curit�</a></td>
+<td><span class="Date">16/02&nbsp;18h31</span><span class="Date">-&gt;</span><a class="mlink2" href="http://www.commentcamarche.net/forum/affich-1356093-msn-je-suis-pirate#2007-02-16%2018%3A31%3A03">balltrap34</a></td><td style="text-align:center"><span class="Texte">31</span></td>
+</tr>
+<tr class="sb">
+<td><span class="Dategris">13/07&nbsp;13h51</span></td>
+<td style="vertical-align:middle"><a href="http://www.commentcamarche.net/forum/affich-1667551-homepage-pirate-probleme-avec-sexplorer-it#2005-07-23%2009%3A27%3A22"><img src="../images/carrevalid.png" border="0" alt="homepage pirate sexplorer.it"></a><a href="http://www.commentcamarche.net/forum/affich-1667551-homepage-pirate-probleme-avec-sexplorer-it">&nbsp;[homepage pirate] probleme avec sexplorer.it</a></td>
+<td><a href="http://www.commentcamarche.net/forum/forum-7-virus-securite">Virus/S�curit�</a></td>
+<td><span class="Date">23/07&nbsp;09h27</span><span class="Date">-&gt;</span><a class="mlink2" href="http://www.commentcamarche.net/forum/affich-1667551-homepage-pirate-probleme-avec-sexplorer-it#2005-07-23%2009%3A27%3A22">balltrap34</a></td><td style="text-align:center"><span class="Texte">22</span></td>
+</tr>
+<tr class="sa">
+<td><span class="Dategris">17/05&nbsp;20h16</span></td>
+<td style="vertical-align:middle"><a href="http://www.commentcamarche.net/forum/affich-1528405-les-vrais-pirates-ne-sont-guere-sur-le-net#2005-05-27%2017%3A37%3A33"><img src="../images/carrevalid.png" border="0" alt=""></a><a href="http://www.commentcamarche.net/forum/affich-1528405-les-vrais-pirates-ne-sont-guere-sur-le-net">&nbsp;les vrais pirates ne sont gu�re sur le net</a></td>
+<td><a href="http://www.commentcamarche.net/forum/forum-8-actualites">Actualit�s</a></td>
+<td><span class="Date">27/05&nbsp;17h37</span><span class="Date">-&gt;</span><a class="Date" href="http://www.commentcamarche.net/forum/affich-1528405-les-vrais-pirates-ne-sont-guere-sur-le-net#2005-05-27%2017%3A37%3A33">440LVB</a></td><td style="text-align:center"><span class="Texte">20</span></td>
+</tr>
+<tr class="sb">
+<td><span class="Date">26/10&nbsp;22h52</span></td>
+<td style="vertical-align:middle"><a href="http://www.commentcamarche.net/forum/affich-2442152-livebox-piratage#2006-12-30%2013%3A14%3A00"><img src="../images/carrevalid.png" border="0" alt="livebox piratage"></a><a href="http://www.commentcamarche.net/forum/affich-2442152-livebox-piratage">&nbsp;(livebox) piratage ??</a></td>
+<td><a href="http://www.commentcamarche.net/forum/forum-10-internet">Internet</a></td>
+<td><span class="Date">30/12&nbsp;13h14</span><span class="Date">-&gt;</span><a class="mlink2" href="http://www.commentcamarche.net/forum/affich-2442152-livebox-piratage#2006-12-30%2013%3A14%3A00">Bergie</a></td><td style="text-align:center"><span class="Texte">19</span></td>
+</tr>
+<tr class="sa">
+<td><span class="Dategris">27/06&nbsp;18h51</span></td>
+<td style="vertical-align:middle"><a href="http://www.commentcamarche.net/forum/affich-1633345-msn-piratage-sur-msn#2006-10-14%2022%3A37%3A10"><img src="../images/carrevalid.png" border="0" alt="msn piratage msn"></a><a href="http://www.commentcamarche.net/forum/affich-1633345-msn-piratage-sur-msn">&nbsp;[MSN] Piratage sur msn</a></td>
+<td><a href="http://www.commentcamarche.net/forum/forum-10-internet">Internet</a></td>
+<td><span class="Date">14/10&nbsp;22h37</span><span class="Date">-&gt;</span><a class="Date" href="http://www.commentcamarche.net/forum/affich-1633345-msn-piratage-sur-msn#2006-10-14%2022%3A37%3A10">manon</a></td><td style="text-align:center"><span class="Texte">16</span></td>
+</tr>
+	<tr class="sa">
+	<td colspan="2"><span class="Texte"><img src="../images/carreblock.gif" width="12" alt="" title="Discussion ferm&eacute;e">Discussion ferm&eacute;e
+    <img src="../images/carrevalid.png" width="12" alt="" title="Probl&egrave;me r&eacute;solu">Probl&egrave;me r&eacute;solu</span></td>
+	<td style="vertical-align:top;text-align:right;" colspan="3"><img src="../images/plus.png" alt="Pirater" border="0"> Plus de discussions sur &laquo;&nbsp;<a href="http://www.commentcamarche.net/f/pirater"><b>Pirater</b></a>&nbsp;&raquo;</td></tr></table>
+<br><span class="Footer">Ce document intitul&eacute; &laquo;&nbsp;<a href="http://www.commentcamarche.net/attaques/methodologie.php3">Attaques - M&eacute;thodologie d'une intrusion sur un r&eacute;seau</a>&nbsp;&raquo; issu de l'<a href="http://www.commentcamarche.net/encyclopedie/">encyclop&eacute;die</a> <a href="http://www.commentcamarche.net/informatique/informatique.php3">informatique</a> <a href="http://www.commentcamarche.net">Comment &Ccedil;a Marche</a> (<a href="http://www.commentcamarche.net/">www.commentcamarche.net</a>) est mis &agrave; disposition sous les termes de la licence <a href="../ccmguide/ccmlicence.htm">Creative Commons</a>.
+Vous pouvez copier, modifier des copies de cette page, dans les conditions fix&eacute;es par la licence, tant que cette note appara&icirc;t clairement.</span>
+<br>&nbsp;
+<center><a href="typologie-pirates.htm"><img src="../images/bckward.gif" border="0" width="38" height="63" alt=""></a>
+<a href="exploits.htm"><img src="../images/forward.gif" border="0" width="38" height="63" alt=""></a></center>
+</div>
+
+</td>
+</tr>
+
+<tr><th colspan="4" style="background-color:#CED7F6">&nbsp;</th></tr>
+</table>
+<div id="footer"><br><a href="../ccmguide/ccmintro.htm"><b>A propos</b></a> | <a href="../ccmguide/cgu-conditions-generales.htm"><b>Conditions g&eacute;n&eacute;rales</b></a>  | &copy; Tous droits r&eacute;serv&eacute;s 2007 <a href="http://www.commentcamarche.net">Quid�a</a>
+</div>
+</body>
+</html>

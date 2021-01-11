@@ -1,0 +1,396 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="copyright" content="2005 by Jean-Fran�ois Pillou">
+<META NAME="ROBOTS" content="all">
+<META NAME="author" content="Jean-Fran�ois Pillou">
+<META NAME="subject" content="Comment �a marche? [Les mots de passe]">
+<META NAME="topic" content="Mot de passe">
+<meta>Mot de passe, Mots de passe, Password, Passwords, identifiant, login, username, Brute force cracking, Attaque par force brute</meta>
+<meta>Attaques - Protection par mot de passe</meta>
+<title>Mots de passe</title>
+<link rel="stylesheet" href="../ccm.css" type="text/css">
+
+
+<link rel="alternate" type="application/rss+xml" title="CCM: Actualit&eacute; informatique" href="http://www.commentcamarche.net/rss/actualite.php3">
+<link rel="alternate" type="application/rss+xml" title="CCM: Actualit&eacute;s du site CommentCaMarche.net" href="http://www.commentcamarche.net/rss/rss.php3">
+</head>
+
+<body>
+
+<table class="ccmmain">
+<tr>
+<td height="1" width="170"><img src="../images/pixel_transparent.gif" height="1" width="100%" alt=""></td>
+<td height="1" width="540"><img src="../images/pixel_transparent.gif" height="1" width="100%" alt=""></td>
+<td height="1" width="12"><img src="../images/pixel_transparent.gif" height="1" width="100%" alt=""></td>
+<td height="1" width="10"><img src="../images/pixel_transparent.gif" height="1" width="100%" alt=""></td>
+</tr>
+
+<tr>
+<td colspan="2" bgcolor="#AEBFE2" style="vertical-align:top;text-align:left;height:46;background-color:#AEBFE2;">
+<table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+    <td style="vertical-align:top;"><a href="../index.htm" target="_top"><img src="../images/logotop.png" border="0" width="328" height="42" title="Comment Ca Marche - Communaut&eacute; informatique" alt="Comment Ca Marche - Communaut&eacute; informatique"></a></td>
+    <td style="width:30px">&nbsp;</td>
+    <td style="vertical-align:middle;text-align:left"></td></tr>
+</table>
+</td>
+<td style="background-color: #AEBFE2; vertical-align:bottom;">&nbsp;</td>
+<td style="background-color: #AEBFE2;">&nbsp;</td>
+</tr>
+
+<tr>
+<td bgcolor="#8EA6D6"><div id="ccmicons"><a href="../index.htm"  ><img src="../images/icohome2.gif" name="icohome" alt="Accueil - Encyclop&eacute;die informatique" title="Accueil - Encyclop&eacute;die informatique" width="24" border="0"></a><a href="http://www.commentcamarche.net/encyclopedie"  ><img src="../images/icozip2.gif" name="icozip" alt="T&eacute;l&eacute;charger l'encyclop&eacute;die" title="T&eacute;l&eacute;charger l'encyclop&eacute;die" width="24" border="0"></a><a href="http://www.commentcamarche.net/ccmbugs/?Bug_url=%2Fattaques%2Fpasswd.php3#ecrire"  ><img src="../images/icowri2.gif" name="icowri" alt="Contribuer &agrave; cet article" width="24" border="0"></a><a href="http://www.commentcamarche.net/contact/"  ><img src="../images/icomail2.gif" name="icomail" alt="" title="Ecrire &agrave; Jean-Francois Pillou" width="24"  border="0"></a></div></td>
+<td colspan="3" bgcolor="#8EA6D6"></td>
+</tr>
+
+<tr>
+<td height="1"><img src="../images/pixel_white.png" height="1" width="100%" alt=""></td>
+<td height="1"><img src="../images/pixel_white.png" height="1" width="100%" alt=""></td>
+<td height="1" rowspan="2"><img src="../images/pixel_white.png" height="1" width="12" alt=""></td>
+
+<td bgcolor="#FFFFFF" height="100%" valign="top" rowspan="2">
+</td>
+</tr>
+
+<tr><td valign="top" colspan="3"><div id="contenu"><h1> Attaques - Protection par mot de passe</h1><table border="0" cellpadding="0" cellspacing="0" width="722">
+	<tr>
+		<td><img src="images/passwd.gif" alt="Mots de passe"></td>
+		<td valign="top" width="38"><a href="exploits.htm"><img src="../images/bckward.gif" border="0" width="38" height="63" alt=""></a></td>
+		<td valign="top" width="38"><a href="man-in-the-middle.htm"><img src="../images/forward.gif" border="0" width="38" height="63" alt=""></a></td>		<td valign="top" width="63"><a href="../index.htm"><img src="../images/logoPClw.gif" alt="Encyclop�die" height="60" width="63" border="0"></a></td>
+		</tr>
+</table>
+<br><div id="CCMmenu"><table width="156">
+<tr><th>Attaques / Arnaques</th></tr>
+<tr><td><a class="mlink" href="attaques.htm">Piratage</a></td></tr>
+<tr><th><span class="rouge">Pirates</span></th></tr>
+<tr><td><a class="mlink" href="typologie-pirates.htm">Typologie de pirates</a></td></tr>
+<tr><td><a class="mlink" href="methodologie.htm">M&eacute;thodologie</a></td></tr>
+<tr><td><a class="mlink" href="exploits.htm">Exploits</a></td></tr>
+<tr><th><span class="rouge">Attaques cryptographiques</span></th></tr>
+<tr><td><a class="mlink" href="passwd.htm">Mot de passe</a></td></tr>
+<tr><td><a class="mlink" href="man-in-the-middle.htm">Man in the middle</a></td></tr>
+<tr><td><a class="mlink" href="rejeu.htm">Rejeu</a></td></tr>
+<tr><th><span class="rouge">D&eacute;ni de service</span></th></tr>
+<tr><td><a class="mlink" href="dos.htm">D&eacute;ni de service</a></td></tr>
+<tr><td><a class="mlink" href="attaque-smurf.htm">Attaque par r&eacute;flexion</a></td></tr>
+<tr><td><a class="mlink" href="attaque-ping-de-la-mort.htm">Ping de la mort</a></td></tr>
+<tr><td><a class="mlink" href="attaque-teardrop.htm">Fragmentation</a></td></tr>
+<tr><td><a class="mlink" href="attaque-land.htm">Land</a></td></tr>
+<tr><td><a class="mlink" href="attaque-syn.htm">SYN</a></td></tr>
+<tr><th><span class="rouge">Techniques</span></th></tr>
+<tr><td><a class="mlink" href="usurpation-ip-spoofing.htm">Usurpation d'adresse IP</a> (<a class="mlink" href="usurpation-ip-spoofing.htm">spoofing</a>)</td></tr>
+<tr><td><a class="mlink" href="vol-session-hijacking.htm">Vol de session</a> (<a class="mlink" href="vol-session-hijacking.htm">hijacking</a>)</td></tr>
+<tr><td><a class="mlink" href="arp-poisoning.htm">ARP poisoning</a></td></tr>
+<tr><td><a class="mlink" href="sniffers.htm">Ecoute r&eacute;seau</a> (<a class="mlink" href="sniffers.htm">sniffers</a>)</td></tr>
+<tr><td><a class="mlink" href="balayage-ports.htm">Balayage de ports</a> (<a class="mlink" href="balayage-ports.htm">Port scanning</a>)</td></tr>
+<tr><td><a class="mlink" href="buffer-overflow.htm">D&eacute;bordement de tampon</a> (<a class="mlink" href="buffer-overflow.htm">Buffer overflow</a>)</td></tr>
+<tr><td><a class="mlink" href="spam.htm">Spam</a></td></tr>
+<tr><td><a class="mlink" href="mailbombing.htm">Mail-bombing</a></td></tr>
+<tr><th><span class="rouge">Vuln&eacute;rabilit&eacute;s du web</span></th></tr>
+<tr><td><a class="mlink" href="attaques-web.htm">Attaques web</a></td></tr>
+<tr><td><a class="mlink" href="falsification-donnees.htm">Falsification de la saisie</a></td></tr>
+<tr><td><a class="mlink" href="manipulation-url.htm">Manipulation d'URL</a></td></tr>
+<tr><td><a class="mlink" href="cross-site-scripting.htm">Cross-Site Scripting</a></td></tr>
+<tr><td><a class="mlink" href="injection-commandes-sql.htm">Injection SQL</a></td></tr>
+<tr><th><span class="rouge">Arnaques</span></th></tr>
+<tr><td><a class="mlink" href="ingenierie-sociale.htm">Ing&eacute;nierie sociale</a> (<a class="mlink" href="ingenierie-sociale.htm">social engineering</a>)</td></tr>
+<tr><td><a class="mlink" href="scam.htm">Scam</a></td></tr>
+<tr><td><a class="mlink" href="phishing.htm">Phishing</a></td></tr>
+<tr><td><a class="mlink" href="loteries.htm">Loteries</a></td></tr>
+<tr><th><span class="rouge">Plus d'information</span></th></tr>
+<tr><td><a class="mlink" href="../virus/virus.htm">Virus</a></td></tr>
+<tr><td><a class="mlink" href="../virus/trojan.htm">Cheval de Troie</a></td></tr>
+<tr><td><a class="mlink" href="../virus/spywares.htm">Spyware</a></td></tr>
+<tr><td><a class="mlink" href="../virus/hoax.htm">Hoax</a></td></tr>
+<tr><td><a class="mlink" href="http://www.commentcamarche.net/faq/12-securite">FAQ s&eacute;curit&eacute;</a></td></tr>
+<tr><td><a class="mlink" href="http://www.commentcamarche.net/faq/156-internet">FAQ Internet</a></td></tr>
+</table></div>
+<hr>
+
+<a name="passwd" class="ancre"></a><h2>Les mots de passe</h2>
+
+<p align="justify">Lors de la connexion &agrave; un syst&egrave;me informatique, celui-ci demande la plupart du temps un
+
+<b>identifiant</b> (en anglais <i>login</i> ou <i>username</i>) et un <b>mot de passe</b> (en anglais <i>password</i>) pour y acc&eacute;der. Ce couple <i>identifiant/mot de passe</i>
+
+forme ainsi la cl&eacute; permettant d'obtenir un acc&egrave;s au syst&egrave;me.
+
+<p align="justify">Si l'identifiant est g&eacute;n&eacute;ralement automatiquement attribu&eacute; par le
+syst&egrave;me ou son administrateur, le choix du mot de passe est souvent laiss&eacute; libre &agrave; l'utilisateur.
+Ainsi, la plupart des utilisateurs, estimant qu'ils n'ont rien de vraiment secret &agrave; prot&eacute;ger,
+se contentent d'utiliser un mot de passe facile &agrave; retenir (par exemple leur identifiant, le pr&eacute;nom de leur conjoint ou leur date de naissance).
+
+<p align="justify">Or, si les donn&eacute;es sur le compte de l'utilisateur n'ont pas un caract&egrave;re strat&eacute;gique,
+l'acc&egrave;s au compte de l'utilisateur peut constituer une porte ouverte vers le syst&egrave;me tout entier.
+En effet, d&egrave;s qu'un pirate obtient un acc&egrave;s
+&agrave; un compte d'une machine, il lui est possible d'&eacute;largir son champ d'action en obtenant la liste
+des utilisateurs autoris&eacute;s &agrave; se connecter &agrave; la machine. A l'aide d'outils de g&eacute;n&eacute;ration
+de mots de passe, le pirate peut essayer un grand nombre de mots de passe g&eacute;n&eacute;r&eacute;s al&eacute;atoirement
+ou &agrave; l'aide d'un dictionnaire (&eacute;ventuellement une combinaison des deux). S'il
+trouve par hasard le mot de passe de l'administrateur, il obtient alors toutes les permissions sur la machine !
+
+<p align="justify">De plus, &agrave; partir d'une machine du r&eacute;seau, le pirate peut &eacute;ventuellement obtenir un acc&egrave;s
+sur le r&eacute;seau local, ce qui signifie qu'il peut dresser une cartographie des autres serveurs
+c&ocirc;toyant celui auquel il a obtenu un acc&egrave;s.
+
+<p align="justify">Les mots de passe des utilisateurs repr&eacute;sentent donc la premi&egrave;re d&eacute;fense contre
+les attaques envers un syst&egrave;me, c'est la raison pour laquelle il est n&eacute;cessaire de d&eacute;finir
+une politique en mati&egrave;re de mots de passe afin d'imposer aux utilisateurs le choix d'un mot de passe
+suffisamment s&eacute;curis&eacute;.
+
+<a name="methodes" class="ancre"></a><h2>M&eacute;thodes d'attaque</h2>
+
+<p align="justify">La plupart des syst&egrave;mes sont configur&eacute;s de mani&egrave;re &agrave;
+bloquer temporairement le compte d'un utilisateur apr&egrave;s un certain nombre de
+tentatives de connexion infructueuses. Ainsi, un pirate peut difficilement s'infiltrer
+sur un syst&egrave;me de cette fa&ccedil;on.
+
+<p align="justify">En contrepartie, un pirate peut se servir de se m&eacute;canisme d'auto-d&eacute;fense
+pour bloquer l'ensemble des comptes utilisateurs afin de provoquer un <a href="dos.htm">d&eacute;ni de service</a>.
+
+<p align="justify">Sur la plupart des syst&egrave;mes les mots de passe sont stock&eacute;s de
+mani&egrave;re chiffr&eacute;e (&laquo;&nbsp;crypt&eacute;e&nbsp;&raquo;) dans un
+fichier ou une base de donn&eacute;es.
+
+<p align="justify">N&eacute;anmois, lorsqu'un pirate obtient un acc&egrave;s au syst&egrave;me et obtient ce fichier, il lui est
+possible de tenter de casser le mot de passe d'un utilisateur en particulier ou bien
+de l'ensemble des comptes utilisateurs.
+
+<a name="force-brute" class="ancre"></a><h2>Attaque par force brute</h2>
+
+<p align="justify">On appelle ainsi &laquo;&nbsp;<b>attaque par force brute</b>&nbsp;&raquo; (en anglais &laquo;&nbsp;<i>brute force cracking</i>&nbsp;&raquo;,
+parfois &eacute;galement <i>attaque exhaustive</i>)
+le cassage d'un mot de passe en testant tous les mots de passe possibles. Il existe un grand nombre
+d'outils, pour chaque syst&egrave;me d'exploitation, permettant de r&eacute;aliser ce genre d'op&eacute;ration. Ces
+outils servent aux administrateurs syst&egrave;me &agrave; &eacute;prouver la solidit&eacute; des mots de passe
+de leurs utilisateurs mais leur usage est d&eacute;tourn&eacute; par les pirates informatiques pour s'introduire
+dans les syst&egrave;mes informatiques.
+
+<a name="dictionnaire" class="ancre"></a><h2>Attaque par dictionnaire</h2>
+
+<p align="justify">Les outils d'attaque par force brute peuvent demander des heures, voire des jours, de calcul m&ecirc;me
+avec des machines &eacute;quip&eacute;es de processeurs puissants. Ainsi, une alternative consiste
+&agrave; effectuer une &laquo;&nbsp;<b>attaque par dictionnaire</b>&nbsp;&raquo;. En effet, la plupart du temps
+les utilisateurs choisissent des mots de passe ayant une signification r&eacute;elle. Avec ce type d'attaques, un tel mot de passe
+peut &ecirc;tre craqu&eacute; en quelques minutes.
+
+<a name="hybride" class="ancre"></a><h2>Attaque hybride</h2>
+
+<p align="justify">Le dernier type d'attaques de ce type, appel&eacute;es &laquo;&nbsp;<b>attaques hybrides</b>&nbsp;&raquo;,
+vise particuli&egrave;rement les mots de passe constitu&eacute; d'un mot traditionnel et suivi d'une lettre ou d'un
+chiffre (tel que &laquo;&nbsp;marechal6&nbsp;&raquo;). Il s'agit d'une combinaison d'attaque par force brute et
+d'attaque par dictionnaire.
+
+<p align="justify">Il existe enfin des moyens permettant au pirate d'obtenir les mots de passe
+des utilisateurs&nbsp;:
+<ul>
+<li>Les <a href="../virus/keylogger.htm">key loggers</a>
+(litt&eacute;ralement &laquo;&nbsp;enregistreurs de touches&nbsp;&raquo;), sont des logiciels qui,
+lorsqu'ils sont install&eacute;s sur le poste de l'utilisateur, permettent d'enregistrer les frappes de claviers
+saisies par l'utilisateur. Les syst&egrave;mes d'exploitation r&eacute;cents poss&egrave;dent des m&eacute;moires
+tampon prot&eacute;g&eacute;es permettant de retenir temporairement le mot de passe et accessibles uniquement
+par le syst&egrave;me.
+<li>L'<a href="ingenierie-sociale.htm">ing&eacute;nierie sociale</a> consiste &agrave; exploiter la na&iuml;vet&eacute; des individus pour obtenir
+des informations. Un pirate peut ainsi obtenir le mot de passe d'un individu en se faisant passer pour un administrateur
+du r&eacute;seau ou bien &agrave; l'inverse appeler l'&eacute;quipe de support en demandant de r&eacute;initialiser
+le mot de passe en pr&eacute;textant un caract&egrave;re d'urgence&nbsp;;
+<li>L'<b>espionnage</b> repr&eacute;sente la plus vieille des m&eacute;thodes. Il suffit en effet parfois
+&agrave; un pirate d'observer les papiers autour de l'&eacute;cran de l'utilisateur ou sous le clavier afin
+d'obtenir le mot de passe. Par ailleurs, si le pirate fait partie de l'entourage de la victime, un simple
+coup d'oeil par dessus son &eacute;paule lors de la saisie du mot de passe peut lui permettre de le voir
+ou de le deviner.
+</ul>
+
+<a name="choix" class="ancre"></a><h2>Choix du mot de passe</h2>
+
+<p align="justify">Il est ais&eacute;ment compr&eacute;hensible que plus un mot de passe est long, plus il est
+difficile &agrave; <a href="../crypto/crypto.htm">casser</a>. D'autre part, un mot de passe constitu&eacute; uniquement de chiffres
+sera beaucoup plus simple &agrave; casser qu'un mot de passe contenant des lettres :</p>
+
+<p align="justify">Un mot de passe de 4 chiffres correspond &agrave; 10 000 possibilit&eacute;s (10<sup>4</sup>).
+Si ce chiffre para&icirc;t &eacute;lev&eacute;, un ordinateur dot&eacute; d'une configuration modeste
+est capable de le casser en quelques minutes.<br/>
+
+On lui pr&eacute;f&egrave;rera un mot de passe de 4 lettres, pour lequel il existe 456972 possibilit&eacute;s (26<sup>4</sup>).
+Dans le m&ecirc;me ordre d'id&eacute;e, un mot de passe m&ecirc;lant chiffres et lettres, voire &eacute;galement
+des majuscules et des caract&egrave;res sp&eacute;ciaux sera encore plus difficile &agrave; casser.
+
+<p align="justify">Mots de passe &agrave; <b>&eacute;viter</b>&nbsp;:
+<ul>
+	<li>votre identifiant</li>
+	<li>votre nom</li>
+	<li>votre pr&eacute;nom ou celui d'un proche (conjoint, enfant, etc.)&nbsp;;</li>
+	<li>un mot du dictionnaire&nbsp;;</li>
+	<li>un mot &agrave; l'envers (les outils de cassage de mots de passe prennent en compte cette possibilit&eacute;)&nbsp;;</li>
+	<li>un mot suivi d'un chiffre, de l'ann&eacute;e en cours ou d'une ann&eacute;e de naissance (par exemple &laquo;&nbsp;password1999&nbsp;&raquo;).</li>
+</ul>
+
+<a name="politique" class="ancre"></a><h2>Politique en mati&egrave;re de mot de passe</h2>
+
+<p align="justify">L'acc&egrave;s au compte d'un seul employ&eacute; d'une entreprise peut compromettre
+la s&eacute;curit&eacute; globale de toute l'organisation. Ainsi, toute entreprise souhaitant
+garantir un niveau de s&eacute;curit&eacute; optimal se doit de mettre en place une
+r&eacute;elle politique de s&eacute;curit&eacute; de mati&egrave;re de mots de passe.
+Il s'agit notamment d'imposer aux employ&eacute;s le choix d'un mot de passe
+conforme &agrave; certaines exigences, par exemple&nbsp;:
+<ul>
+<li>Une longueur de mot de passe minimale
+<li>La pr&eacute;sence de caract&egrave;res particuliers
+<li>Un changement de casse (minuscule et majuscules)
+</ul>
+
+<p align="justify">Par ailleurs, il est possible de renforcer cette politique de
+s&eacute;curit&eacute; en imposant une dur&eacute;e d'expiration des mots de passe,
+afin d'obliger les utilisateurs &agrave; modifier r&eacute;guli&egrave;rement leur
+mot de passe. Cela complique ainsi la t&acirc;che des pirates essayant de casser des mots de passe
+sur la dur&eacute;e. Par ailleurs il s'agit d'un excellent moyen de limiter la
+dur&eacute;e de vie des mots de passe ayant &eacute;t&eacute; cass&eacute;s.
+
+<p align="justify">Enfin, il est recommand&eacute; aux administrateurs syst&egrave;me d'utiliser des logiciels de cassage de mots de passe en interne
+sur les mots de passe de leurs utilisateurs afin d'en &eacute;prouver la solidit&eacute;. Ceci doit n&eacute;anmoins
+se faire dans le cadre de la politique de s&eacute;curit&eacute; et &ecirc;tre &eacute;crit noir sur blanc, afin
+d'avoir l'approbation de la direction et des utilisateurs.
+
+<a name="multiples" class="ancre"></a><h2>Mots de passe multiples</h2>
+
+<p align="justify">Il n'est pas sain d'avoir un seul mot de passe, au m&ecirc;me titre qu'il ne serait pas
+sain d'avoir comme code de carte bancaire le m&ecirc;me code que pour son t&eacute;l&eacute;phone
+portable et que le digicode en bas de l'immeuble.
+
+<p align="justify">Il est donc conseill&eacute; de poss&eacute;der plusieurs mots de passe par cat&eacute;gorie
+d'usage, en fonction de la confidentialit&eacute; du secret qu'il prot&egrave;ge. Le code d'une carte
+bancaire devra ainsi &ecirc;tre utilis&eacute; uniquement pour cet usage. Par contre, le
+code PIN d'un t&eacute;l&eacute;phone portable peut correspondre &agrave; celui du cadenas d'une
+valise.
+
+<p align="justify">De la m&ecirc;me fa&ccedil;on, lors de l'inscription &agrave; un service en ligne
+demandant une adresse &eacute;lectronique (par exemple la <a href="http://www.commentcamarche.net/newsletter/">lettre
+d'information de CommentCaMarche</a>), il est fortement d&eacute;conseill&eacute; de choisir le m&ecirc;me mot de passe
+que celui permettant d'acc&eacute;der &agrave; cette messagerie car un administrateur peu
+scrupuleux, pourrait sans aucun probl&egrave;me avoir un oeil sur votre vie priv&eacute;e !
+
+<h2 id="sujets_sim">Trucs & astuces pertinents trouv&eacute;s dans la base de connaissances</h2><table class="simili"><tr class="sb">
+<td style="width:75px"><span class="">21/02&nbsp;19h20</span></td><td valign="middle"><a href="http://www.commentcamarche.net/faq/sujet-670-msn-mot-de-passe-perdu"><img src="../images/carre.gif" border="0" alt=""></a>&nbsp;<a href="http://www.commentcamarche.net/faq/sujet-670-msn-mot-de-passe-perdu">Mot de passe perdu</a> (<a href="http://www.commentcamarche.net/faq/342-msn-messenger">MSN Messenger</a>)</td>
+
+</tr>
+<tr class="sa">
+<td style="width:75px"><span class="Date">28/12&nbsp;00h03</span></td><td valign="middle"><a href="http://www.commentcamarche.net/faq/sujet-4795-php-recuperer-login-et-mot-de-passe-passes-par-un-htaccess"><img src="../images/carre.gif" border="0" alt=""></a>&nbsp;<a href="http://www.commentcamarche.net/faq/sujet-4795-php-recuperer-login-et-mot-de-passe-passes-par-un-htaccess">R�cup�rer login et mot de passe pass�s par un .htaccess</a> (<a href="http://www.commentcamarche.net/faq/82-php">PHP</a>)</td>
+
+</tr>
+<tr class="sb">
+<td style="width:75px"><span class="Date">15/09&nbsp;21h13</span></td><td valign="middle"><a href="http://www.commentcamarche.net/faq/sujet-2871-utiliser-truecrypt-pour-proteger-l-acces-a-ses-fichiers"><img src="../images/carre.gif" border="0" alt=""></a>&nbsp;<a href="http://www.commentcamarche.net/faq/sujet-2871-utiliser-truecrypt-pour-proteger-l-acces-a-ses-fichiers">Utiliser TrueCrypt pour prot�ger l'acc�s � ses fichiers</a> (<a href="http://www.commentcamarche.net/faq/12-securite">S�curit�</a>)</td>
+
+</tr>
+<tr class="sa">
+<td style="width:75px"><span class="Date">04/09&nbsp;12h09</span></td><td valign="middle"><a href="http://www.commentcamarche.net/faq/sujet-3879-windows-mot-de-passe-de-session-perdu-ou-oublie"><img src="../images/carre.gif" border="0" alt=""></a>&nbsp;<a href="http://www.commentcamarche.net/faq/sujet-3879-windows-mot-de-passe-de-session-perdu-ou-oublie">Mot de passe de session perdu ou oubli�</a> (<a href="http://www.commentcamarche.net/faq/102-windows">Windows</a>)</td>
+
+</tr>
+<tr class="sb">
+<td style="width:75px"><span class="Date">17/08&nbsp;16h49</span></td><td valign="middle"><a href="http://www.commentcamarche.net/faq/sujet-1204-msn-comment-changer-mon-mot-de-passe"><img src="../images/carre.gif" border="0" alt=""></a>&nbsp;<a href="http://www.commentcamarche.net/faq/sujet-1204-msn-comment-changer-mon-mot-de-passe">Comment changer mon mot de passe</a> (<a href="http://www.commentcamarche.net/faq/342-msn-messenger">MSN Messenger</a>)</td>
+
+</tr>
+<tr class="sa">
+<td style="width:75px"><span class="Date">03/02&nbsp;08h51</span></td><td valign="middle"><a href="http://www.commentcamarche.net/faq/sujet-426-proteger-fichier-dossier-par-mot-de-passe"><img src="../images/carre.gif" border="0" alt=""></a>&nbsp;<a href="http://www.commentcamarche.net/faq/sujet-426-proteger-fichier-dossier-par-mot-de-passe">Prot�ger fichier/dossier par mot de passe</a> (<a href="http://www.commentcamarche.net/faq/12-securite">S�curit�</a>)</td>
+
+</tr>
+<tr class="sb">
+<td style="width:75px"><span class="Date">20/07&nbsp;14h12</span></td><td valign="middle"><a href="http://www.commentcamarche.net/faq/sujet-1881-messagerie-pirater-une-boite-mail-facile"><img src="../images/carre.gif" border="0" alt=""></a>&nbsp;<a href="http://www.commentcamarche.net/faq/sujet-1881-messagerie-pirater-une-boite-mail-facile">Pirater une boite mail ? Facile !</a> (<a href="http://www.commentcamarche.net/faq/282-messagerie-electronique">Messagerie �lectronique</a>)</td>
+
+</tr>
+<tr class="sa">
+<td style="width:75px"><span class="Date">06/07&nbsp;00h30</span></td><td valign="middle"><a href="http://www.commentcamarche.net/faq/sujet-1157-msn-empecher-le-demarrage-sans-mot-de-passe"><img src="../images/carre.gif" border="0" alt=""></a>&nbsp;<a href="http://www.commentcamarche.net/faq/sujet-1157-msn-empecher-le-demarrage-sans-mot-de-passe">Emp�cher le d�marrage sans mot de passe</a> (<a href="http://www.commentcamarche.net/faq/342-msn-messenger">MSN Messenger</a>)</td>
+
+</tr>
+<tr class="sb">
+<td style="width:75px"><span class="Date">05/01&nbsp;14h49</span></td><td valign="middle"><a href="http://www.commentcamarche.net/faq/sujet-587-bios-mot-de-passe-perdu-reinitialisation"><img src="../images/carre.gif" border="0" alt=""></a>&nbsp;<a href="http://www.commentcamarche.net/faq/sujet-587-bios-mot-de-passe-perdu-reinitialisation">Mot de passe perdu - R�initialisation</a> (<a href="http://www.commentcamarche.net/faq/190-bios">BIOS</a>)</td>
+
+</tr>
+<tr class="sa">
+<td style="width:75px"><span class="Date">26/11&nbsp;20h22</span></td><td valign="middle"><a href="http://www.commentcamarche.net/faq/sujet-4675-supprimer-l-historique-des-recherches"><img src="../images/carre.gif" border="0" alt=""></a>&nbsp;<a href="http://www.commentcamarche.net/faq/sujet-4675-supprimer-l-historique-des-recherches">Supprimer l'historique des recherches</a> (<a href="http://www.commentcamarche.net/faq/156-internet">Internet</a>)</td>
+
+</tr>
+<tr class="sa"><td colspan="3" style="text-align:right"><img src="../images/plus.png" alt="Mot de passe" border="0"> Plus d'astuces sur &laquo;&nbsp;<a href="../astuces/mot-de-passe"><b>Mot de passe</b></a>&nbsp;&raquo;</td></tr></table><h2 id="discus_sim">Discussions pertinentes trouv&eacute;es dans le forum</h2><table class="simili"><tr class="sb">
+<td><span class="Date">16/01&nbsp;16h24</span></td>
+<td style="vertical-align:middle"><a href="http://www.commentcamarche.net/forum/affich-2596166-decrypter-le-mot-de-passe-de-pdf#2007-02-13%2011%3A51%3A48"><img src="../images/carrevalid.png" border="0" alt="decrypter mot passe pdf"></a><a href="http://www.commentcamarche.net/forum/affich-2596166-decrypter-le-mot-de-passe-de-pdf">&nbsp;decrypter le mot de passe de pdf</a></td>
+<td><a href="http://www.commentcamarche.net/forum/forum-1-logiciels-pilotes">Logiciels/Pilotes</a></td>
+<td><span class="Date">13/02&nbsp;11h51</span><span class="Date">-&gt;</span><a class="mlink2" href="http://www.commentcamarche.net/forum/affich-2596166-decrypter-le-mot-de-passe-de-pdf#2007-02-13%2011%3A51%3A48">toptitbal</a></td><td style="text-align:center"><span class="Texte">5</span></td>
+</tr>
+<tr class="sa">
+<td><span class="Date">10/02&nbsp;19h46</span></td>
+<td style="vertical-align:middle"><a href="http://www.commentcamarche.net/forum/affich-2666478-enlever-un-mot-de-passe#2007-02-11%2018%3A10%3A20"><img src="../images/carrevalid.png" border="0" alt="enlever mot passe"></a><a href="http://www.commentcamarche.net/forum/affich-2666478-enlever-un-mot-de-passe">&nbsp;[enlever un mot de passe]</a></td>
+<td><a href="http://www.commentcamarche.net/forum/forum-2-materiel-hardware">Mat�riel (hardware)</a></td>
+<td><span class="Date">11/02&nbsp;18h10</span><span class="Date">-&gt;</span><a class="mlink2" href="http://www.commentcamarche.net/forum/affich-2666478-enlever-un-mot-de-passe#2007-02-11%2018%3A10%3A20">sixtic</a></td><td style="text-align:center"><span class="Texte">4</span></td>
+</tr>
+<tr class="sb">
+<td><span class="Dategris">04/05&nbsp;12h04</span></td>
+<td style="vertical-align:middle"><a href="http://www.commentcamarche.net/forum/affich-2220465-gestionnaire-d-acces-a-ie-mot-de-passe#2006-05-18%2016%3A26%3A24"><img src="../images/carrevalid.png" border="0" alt="gestionnaire acc�s ie mot passe"></a><a href="http://www.commentcamarche.net/forum/affich-2220465-gestionnaire-d-acces-a-ie-mot-de-passe">&nbsp;[Gestionnaire d'acc�s � IE-Mot de Passe]</a></td>
+<td><a href="http://www.commentcamarche.net/forum/forum-10-internet">Internet</a></td>
+<td><span class="Date">18/05&nbsp;16h26</span><span class="Date">-&gt;</span><a class="mlink2" href="http://www.commentcamarche.net/forum/affich-2220465-gestionnaire-d-acces-a-ie-mot-de-passe#2006-05-18%2016%3A26%3A24">afideg</a></td><td style="text-align:center"><span class="Texte">48</span></td>
+</tr>
+<tr class="sa">
+<td><span class="Dategris">25/09&nbsp;11h38</span></td>
+<td style="vertical-align:middle"><a href="http://www.commentcamarche.net/forum/affich-1816353-perte-du-mot-de-passe-principal#2006-12-17%2004%3A52%3A29"><img src="../images/carrevalid.png" border="0" alt="perte mot passe principal"></a><a href="http://www.commentcamarche.net/forum/affich-1816353-perte-du-mot-de-passe-principal">&nbsp;perte du mot de passe principal</a></td>
+<td><a href="http://www.commentcamarche.net/forum/forum-14-macos">MacOS</a></td>
+<td><span class="Date">17/12&nbsp;04h52</span><span class="Date">-&gt;</span><a class="mlink2" href="http://www.commentcamarche.net/forum/affich-1816353-perte-du-mot-de-passe-principal#2006-12-17%2004%3A52%3A29">Louis&nbsp;Hoebre...</a></td><td style="text-align:center"><span class="Texte">24</span></td>
+</tr>
+<tr class="sb">
+<td><span class="Dategris">06/10&nbsp;20h14</span></td>
+<td style="vertical-align:middle"><a href="http://www.commentcamarche.net/forum/affich-2410117-partage-fichiers-avec-samba-sans-mot-de-passe#2006-10-09%2021%3A01%3A42"><img src="../images/carrevalid.png" border="0" alt="partage fichiers samba sans mot passe"></a><a href="http://www.commentcamarche.net/forum/affich-2410117-partage-fichiers-avec-samba-sans-mot-de-passe">&nbsp;partage fichiers avec samba sans mot de passe</a></td>
+<td><a href="http://www.commentcamarche.net/forum/forum-13-linux-unix">Linux/Unix</a></td>
+<td><span class="Date">09/10&nbsp;21h01</span><span class="Date">-&gt;</span><a class="mlink2" href="http://www.commentcamarche.net/forum/affich-2410117-partage-fichiers-avec-samba-sans-mot-de-passe#2006-10-09%2021%3A01%3A42">pristella</a></td><td style="text-align:center"><span class="Texte">20</span></td>
+</tr>
+<tr class="sa">
+<td><span class="Dategris">16/06&nbsp;12h48</span></td>
+<td style="vertical-align:middle"><a href="http://www.commentcamarche.net/forum/affich-1606535-msn-changer-son-mot-de-passe#2006-05-09%2012%3A55%3A11"><img src="../images/carreblock.gif" border="0" alt="msn changer son mot passe" title="La discussion a �t� ferm�e par un mod�rateur.
+Vous pouvez uniquement lire les discussions mais vous ne pouvez pas y r�pondre.
+"></a><a href="http://www.commentcamarche.net/forum/affich-1606535-msn-changer-son-mot-de-passe">&nbsp;[MSN] Changer son mot de passe</a></td>
+<td><a href="http://www.commentcamarche.net/forum/forum-10-internet">Internet</a></td>
+<td><span class="Date">09/05&nbsp;12h55</span><span class="Date">-&gt;</span><a class="mlink2" href="http://www.commentcamarche.net/forum/affich-1606535-msn-changer-son-mot-de-passe#2006-05-09%2012%3A55%3A11">^^Marie^^</a></td><td style="text-align:center"><span class="Texte">19</span></td>
+</tr>
+<tr class="sb">
+<td><span class="Dategris">15/08&nbsp;00h19</span></td>
+<td style="vertical-align:middle"><a href="http://www.commentcamarche.net/forum/affich-1734414-free-mot-de-passe-et-login-besoin-reponses#2006-02-06%2021%3A24%3A20"><img src="../images/carrevalid.png" border="0" alt="free mot passe login r�ponses"></a><a href="http://www.commentcamarche.net/forum/affich-1734414-free-mot-de-passe-et-login-besoin-reponses">&nbsp;[Free] mot de passe et login; Besoin r�ponses</a></td>
+<td><a href="http://www.commentcamarche.net/forum/forum-3-developpement">D&eacute;veloppement</a></td>
+<td><span class="Date">06/02&nbsp;21h24</span><span class="Date">-&gt;</span><a class="Date" href="http://www.commentcamarche.net/forum/affich-1734414-free-mot-de-passe-et-login-besoin-reponses#2006-02-06%2021%3A24%3A20">jord</a></td><td style="text-align:center"><span class="Texte">18</span></td>
+</tr>
+<tr class="sa">
+<td><span class="Dategris">17/07&nbsp;09h55</span></td>
+<td style="vertical-align:middle"><a href="http://www.commentcamarche.net/forum/affich-2307495-perte-du-mot-de-passe-yahoo#2006-07-17%2013%3A55%3A57"><img src="../images/carrevalid.png" border="0" alt="perte mot passe yahoo"></a><a href="http://www.commentcamarche.net/forum/affich-2307495-perte-du-mot-de-passe-yahoo">&nbsp;perte du mot de passe yahoo</a></td>
+<td><a href="http://www.commentcamarche.net/forum/forum-10-internet">Internet</a></td>
+<td><span class="Date">17/07&nbsp;13h55</span><span class="Date">-&gt;</span><a class="mlink2" href="http://www.commentcamarche.net/forum/affich-2307495-perte-du-mot-de-passe-yahoo#2006-07-17%2013%3A55%3A57">rimini</a></td><td style="text-align:center"><span class="Texte">18</span></td>
+</tr>
+<tr class="sb">
+<td><span class="Date">01/02&nbsp;00h52</span></td>
+<td style="vertical-align:middle"><a href="http://www.commentcamarche.net/forum/affich-2638853-mot-de-passe-inconnu#2007-02-01%2002%3A23%3A46"><img src="../images/carrevalid.png" border="0" alt="mot passe inconnu"></a><a href="http://www.commentcamarche.net/forum/affich-2638853-mot-de-passe-inconnu">&nbsp;mot de passe inconnu!!!</a></td>
+<td><a href="http://www.commentcamarche.net/forum/forum-11-windows">Windows</a></td>
+<td><span class="Date">01/02&nbsp;02h23</span><span class="Date">-&gt;</span><a class="mlink2" href="http://www.commentcamarche.net/forum/affich-2638853-mot-de-passe-inconnu#2007-02-01%2002%3A23%3A46">3x</a></td><td style="text-align:center"><span class="Texte">18</span></td>
+</tr>
+<tr class="sa">
+<td><span class="Dategris">02/07&nbsp;12h10</span></td>
+<td style="vertical-align:middle"><a href="http://www.commentcamarche.net/forum/affich-1645069-pb-saisie-du-mot-de-passe-reseau#2005-09-09%2023%3A31%3A18"><img src="../images/carrevalid.png" border="0" alt="saisie mot passe r�seau"></a><a href="http://www.commentcamarche.net/forum/affich-1645069-pb-saisie-du-mot-de-passe-reseau">&nbsp;Pb saisie du mot de passe r�seau</a></td>
+<td><a href="http://www.commentcamarche.net/forum/forum-5-reseaux">R�seaux</a></td>
+<td><span class="Date">09/09&nbsp;23h31</span><span class="Date">-&gt;</span><a class="mlink2" href="http://www.commentcamarche.net/forum/affich-1645069-pb-saisie-du-mot-de-passe-reseau#2005-09-09%2023%3A31%3A18">sylvanohe</a></td><td style="text-align:center"><span class="Texte">15</span></td>
+</tr>
+	<tr class="sa">
+	<td colspan="2"><span class="Texte"><img src="../images/carreblock.gif" width="12" alt="" title="Discussion ferm&eacute;e">Discussion ferm&eacute;e
+    <img src="../images/carrevalid.png" width="12" alt="" title="Probl&egrave;me r&eacute;solu">Probl&egrave;me r&eacute;solu</span></td>
+	<td style="vertical-align:top;text-align:right;" colspan="3"><img src="../images/plus.png" alt="Mot de passe" border="0"> Plus de discussions sur &laquo;&nbsp;<a href="http://www.commentcamarche.net/f/mot-de-passe"><b>Mot de passe</b></a>&nbsp;&raquo;</td></tr></table>
+<br><span class="Footer">Ce document intitul&eacute; &laquo;&nbsp;<a href="http://www.commentcamarche.net/attaques/passwd.php3">Attaques - Protection par mot de passe</a>&nbsp;&raquo; issu de l'<a href="http://www.commentcamarche.net/encyclopedie/">encyclop&eacute;die</a> <a href="http://www.commentcamarche.net/informatique/informatique.php3">informatique</a> <a href="http://www.commentcamarche.net">Comment &Ccedil;a Marche</a> (<a href="http://www.commentcamarche.net/">www.commentcamarche.net</a>) est mis &agrave; disposition sous les termes de la licence <a href="../ccmguide/ccmlicence.htm">Creative Commons</a>.
+Vous pouvez copier, modifier des copies de cette page, dans les conditions fix&eacute;es par la licence, tant que cette note appara&icirc;t clairement.</span>
+<br>&nbsp;
+<center><a href="exploits.htm"><img src="../images/bckward.gif" border="0" width="38" height="63" alt=""></a>
+<a href="man-in-the-middle.htm"><img src="../images/forward.gif" border="0" width="38" height="63" alt=""></a></center>
+</div>
+
+</td>
+</tr>
+
+<tr><th colspan="4" style="background-color:#CED7F6">&nbsp;</th></tr>
+</table>
+<div id="footer"><br><a href="../ccmguide/ccmintro.htm"><b>A propos</b></a> | <a href="../ccmguide/cgu-conditions-generales.htm"><b>Conditions g&eacute;n&eacute;rales</b></a>  | &copy; Tous droits r&eacute;serv&eacute;s 2007 <a href="http://www.commentcamarche.net">Quid�a</a>
+</div>
+</body>
+</html>

