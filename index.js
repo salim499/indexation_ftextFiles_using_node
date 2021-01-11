@@ -126,6 +126,7 @@ server.post("/post/:id",(req,res)=>{
 
 })
 // lancer le serveur
+let port = process.env.PORT || 1234
 server.listen(1234,function(){
     console.log("server en écoute au port 1234")
 })
